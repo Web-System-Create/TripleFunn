@@ -19,7 +19,7 @@ const translations = {
     'nav.gallery': 'Galerie',
     'nav.regulations': 'Regulament',
     'nav.admin': 'Admin',
-    
+
     // Hero
     'hero.title': 'Cea mai',
     'hero.title.highlight': 'distractivă',
@@ -30,18 +30,18 @@ const translations = {
     'hero.stats.parties': 'Petreceri reușite',
     'hero.stats.experience': 'Ani experiență',
     'hero.stats.children': 'Copii pe zi',
-    
+
     // Services
     'services.title': 'Serviciile Noastre',
     'services.subtitle': 'Oferim o gamă completă de servicii pentru a face experiența ta și a copilului tău una specială',
-    
+
     // Menu
     'menu.title': 'Meniul Nostru',
     'menu.subtitle': 'Preparate delicioase pentru copii și adulți, pregătite cu ingrediente proaspete și multă dragoste',
     'menu.category.copii': 'Meniu Copii',
     'menu.category.adulti': 'Meniu Adulți',
     'menu.category.bauturi': 'Băuturi',
-    
+
     // Menu Items - Kids
     'menu.kids.crispy': 'Crispy din mușchiuleț de pui',
     'menu.kids.crispy.desc': '2 bucăți (100g) + 100g cartofi prăjiți + băutură la alegere',
@@ -55,7 +55,7 @@ const translations = {
     'menu.kids.icecream.desc': 'Vanilie, ciocolată, căpșuni',
     'menu.kids.cake': 'Tort personalizat',
     'menu.kids.cake.desc': 'Comandă specială (min. 1kg)',
-    
+
     // Menu Items - Adults
     'menu.adults.grill': 'Platou Grătar Mixt (10 persoane)',
     'menu.adults.grill.desc': '10 buc crispy pui + 10 buc ceafă + 10 buc mici + 650g cartofi prăjiți',
@@ -69,7 +69,7 @@ const translations = {
     'menu.adults.pizza.desc': 'Șuncă, ciuperci, măsline, ardei',
     'menu.adults.carbonara': 'Paste Carbonara',
     'menu.adults.carbonara.desc': 'Cu bacon și parmezan',
-    
+
     // Menu Items - Drinks
     'menu.drinks.juice': 'Sucuri naturale',
     'menu.drinks.juice.desc': 'Portocale, mere, morcovi',
@@ -83,7 +83,7 @@ const translations = {
     'menu.drinks.smoothie.desc': 'Banane, căpșuni, mango',
     'menu.drinks.water': 'Apă minerală',
     'menu.drinks.water.desc': '0.5L sau 1.5L',
-    
+
     // Pricing
     'pricing.title': 'Pachete Petreceri',
     'pricing.subtitle': 'Alege pachetul perfect pentru petrecerea copilului tău. Toate pachetele includ acces complet la zonele de joacă',
@@ -94,7 +94,7 @@ const translations = {
     'pricing.extra.time': 'Prelungire timp',
     'pricing.extra.decorations': 'Decorațiuni extra',
     'pricing.extra.transport': 'Transport tort',
-    
+
     // Offers
     'offers.title': 'Oferte Speciale',
     'offers.subtitle': 'Profită de ofertele noastre speciale și economisește la petrecerea perfectă pentru copilul tău',
@@ -114,24 +114,24 @@ const translations = {
     'offers.cta.subtitle': 'Contactează-ne acum pentru a rezerva data dorită și pentru a primi o ofertă personalizată',
     'offers.cta.call': 'Sună Acum: 0722 123 456',
     'offers.cta.whatsapp': 'Trimite Mesaj WhatsApp',
-    
+
     // Gallery
     'gallery.title': 'Galeria Noastră',
-    'gallery.subtitle': 'Descoperă atmosfera magică și momentele speciale de la PlayFun',
+    'gallery.subtitle': 'Descoperă atmosfera magică și momentele speciale de la TripleFunn',
     'gallery.filter.all': 'Toate',
     'gallery.filter.playground': 'Zone de Joacă',
     'gallery.filter.parties': 'Petreceri',
     'gallery.filter.food': 'Mâncare',
     'gallery.filter.events': 'Evenimente',
-    
+
     // Regulations
     'regulations.title': 'Regulamentul Nostru',
     'regulations.subtitle': 'Pentru siguranța și confortul tuturor, vă rugăm să respectați regulamentul nostru',
-    
+
     // Contact
     'contact.title': 'Contactează-ne',
     'contact.subtitle': 'Suntem aici pentru tine! Contactează-ne pentru rezervări sau pentru orice întrebare',
-    
+
     // Footer
     'footer.description': 'Locul perfect pentru petreceri de copii și distracție în familie. Creăm amintiri de neuitat într-un mediu sigur și prietenos.',
     'footer.quickNav': 'Navigare Rapidă',
@@ -152,7 +152,7 @@ const translations = {
     'nav.gallery': 'Gallery',
     'nav.regulations': 'Regulations',
     'nav.admin': 'Admin',
-    
+
     // Hero
     'hero.title': 'The most',
     'hero.title.highlight': 'fun',
@@ -163,18 +163,18 @@ const translations = {
     'hero.stats.parties': 'Successful parties',
     'hero.stats.experience': 'Years experience',
     'hero.stats.children': 'Children per day',
-    
+
     // Services
     'services.title': 'Our Services',
     'services.subtitle': 'We offer a complete range of services to make your and your child\'s experience special',
-    
+
     // Menu
     'menu.title': 'Our Menu',
     'menu.subtitle': 'Delicious dishes for children and adults, prepared with fresh ingredients and lots of love',
     'menu.category.copii': 'Kids Menu',
     'menu.category.adulti': 'Adults Menu',
     'menu.category.bauturi': 'Drinks',
-    
+
     // Menu Items - Kids
     'menu.kids.crispy': 'Crispy Chicken Tenders',
     'menu.kids.crispy.desc': '2 pieces (100g) + 100g french fries + drink of choice',
@@ -188,7 +188,7 @@ const translations = {
     'menu.kids.icecream.desc': 'Vanilla, chocolate, strawberry',
     'menu.kids.cake': 'Custom Cake',
     'menu.kids.cake.desc': 'Special order (min. 1kg)',
-    
+
     // Menu Items - Adults
     'menu.adults.grill': 'Mixed Grill Platter (10 people)',
     'menu.adults.grill.desc': '10 pcs crispy chicken + 10 pcs pork neck + 10 pcs sausages + 650g french fries',
@@ -202,7 +202,7 @@ const translations = {
     'menu.adults.pizza.desc': 'Ham, mushrooms, olives, peppers',
     'menu.adults.carbonara': 'Carbonara Pasta',
     'menu.adults.carbonara.desc': 'With bacon and parmesan',
-    
+
     // Menu Items - Drinks
     'menu.drinks.juice': 'Fresh Juices',
     'menu.drinks.juice.desc': 'Orange, apple, carrot',
@@ -216,7 +216,7 @@ const translations = {
     'menu.drinks.smoothie.desc': 'Banana, strawberry, mango',
     'menu.drinks.water': 'Mineral Water',
     'menu.drinks.water.desc': '0.5L or 1.5L',
-    
+
     // Pricing
     'pricing.title': 'Party Packages',
     'pricing.subtitle': 'Choose the perfect package for your child\'s party. All packages include full access to play areas',
@@ -227,7 +227,7 @@ const translations = {
     'pricing.extra.time': 'Time extension',
     'pricing.extra.decorations': 'Extra decorations',
     'pricing.extra.transport': 'Cake delivery',
-    
+
     // Offers
     'offers.title': 'Special Offers',
     'offers.subtitle': 'Take advantage of our special offers and save on the perfect party for your child',
@@ -247,24 +247,24 @@ const translations = {
     'offers.cta.subtitle': 'Contact us now to book your desired date and receive a personalized offer',
     'offers.cta.call': 'Call Now: 0722 123 456',
     'offers.cta.whatsapp': 'Send WhatsApp Message',
-    
+
     // Gallery
     'gallery.title': 'Our Gallery',
-    'gallery.subtitle': 'Discover the magical atmosphere and special moments at PlayFun',
+    'gallery.subtitle': 'Discover the magical atmosphere and special moments at TripleFunn',
     'gallery.filter.all': 'All',
     'gallery.filter.playground': 'Playground',
     'gallery.filter.parties': 'Parties',
     'gallery.filter.food': 'Food',
     'gallery.filter.events': 'Events',
-    
+
     // Regulations
     'regulations.title': 'Our Regulations',
     'regulations.subtitle': 'For everyone\'s safety and comfort, please follow our regulations',
-    
+
     // Contact
     'contact.title': 'Contact Us',
     'contact.subtitle': 'We are here for you! Contact us for reservations or any questions',
-    
+
     // Footer
     'footer.description': 'The perfect place for children\'s parties and family fun. We create unforgettable memories in a safe and friendly environment.',
     'footer.quickNav': 'Quick Navigation',
@@ -285,7 +285,7 @@ const translations = {
     'nav.gallery': 'Galéria',
     'nav.regulations': 'Szabályzat',
     'nav.admin': 'Admin',
-    
+
     // Hero
     'hero.title': 'A leg',
     'hero.title.highlight': 'szórakoztatóbb',
@@ -296,18 +296,18 @@ const translations = {
     'hero.stats.parties': 'Sikeres bulik',
     'hero.stats.experience': 'Év tapasztalat',
     'hero.stats.children': 'Gyerek naponta',
-    
+
     // Services
     'services.title': 'Szolgáltatásaink',
     'services.subtitle': 'Teljes körű szolgáltatásokat kínálunk, hogy a te és gyermeked élménye különleges legyen',
-    
+
     // Menu
     'menu.title': 'Menünk',
     'menu.subtitle': 'Finom ételek gyerekeknek és felnőtteknek, friss alapanyagokból és sok szeretettel készítve',
     'menu.category.copii': 'Gyerek Menü',
     'menu.category.adulti': 'Felnőtt Menü',
     'menu.category.bauturi': 'Italok',
-    
+
     // Menu Items - Kids
     'menu.kids.crispy': 'Ropogós Csirkemell',
     'menu.kids.crispy.desc': '2 darab (100g) + 100g sült krumpli + választott ital',
@@ -321,7 +321,7 @@ const translations = {
     'menu.kids.icecream.desc': 'Vanília, csokoládé, eper',
     'menu.kids.cake': 'Egyedi Torta',
     'menu.kids.cake.desc': 'Különleges rendelés (min. 1kg)',
-    
+
     // Menu Items - Adults
     'menu.adults.grill': 'Vegyes Grillkínálat (10 fő)',
     'menu.adults.grill.desc': '10 db ropogós csirke + 10 db tarja + 10 db kolbász + 650g sült krumpli',
@@ -335,7 +335,7 @@ const translations = {
     'menu.adults.pizza.desc': 'Sonka, gomba, olíva, paprika',
     'menu.adults.carbonara': 'Carbonara Tészta',
     'menu.adults.carbonara.desc': 'Szalonnával és parmezánnal',
-    
+
     // Menu Items - Drinks
     'menu.drinks.juice': 'Friss Gyümölcslevek',
     'menu.drinks.juice.desc': 'Narancs, alma, sárgarépa',
@@ -349,7 +349,7 @@ const translations = {
     'menu.drinks.smoothie.desc': 'Banán, eper, mangó',
     'menu.drinks.water': 'Ásványvíz',
     'menu.drinks.water.desc': '0.5L vagy 1.5L',
-    
+
     // Pricing
     'pricing.title': 'Buli Csomagok',
     'pricing.subtitle': 'Válaszd ki a tökéletes csomagot gyermeked bulijához. Minden csomag teljes hozzáférést biztosít a játékterületekhez',
@@ -360,7 +360,7 @@ const translations = {
     'pricing.extra.time': 'Időhosszabbítás',
     'pricing.extra.decorations': 'Extra dekorációk',
     'pricing.extra.transport': 'Torta szállítás',
-    
+
     // Offers
     'offers.title': 'Különleges Ajánlatok',
     'offers.subtitle': 'Használd ki különleges ajánlatainkat és spórolj gyermeked tökéletes buliján',
@@ -380,24 +380,24 @@ const translations = {
     'offers.cta.subtitle': 'Lépj kapcsolatba velünk most, hogy lefoglald a kívánt dátumot és kapj személyre szabott ajánlatot',
     'offers.cta.call': 'Hívj Most: 0722 123 456',
     'offers.cta.whatsapp': 'WhatsApp Üzenet Küldése',
-    
+
     // Gallery
     'gallery.title': 'Galériánk',
-    'gallery.subtitle': 'Fedezd fel a varázslatos hangulatot és különleges pillanatokat a PlayFun-ban',
+    'gallery.subtitle': 'Fedezd fel a varázslatos hangulatot és különleges pillanatokat a TripleFunn-ban',
     'gallery.filter.all': 'Összes',
     'gallery.filter.playground': 'Játszótér',
     'gallery.filter.parties': 'Bulik',
     'gallery.filter.food': 'Étel',
     'gallery.filter.events': 'Események',
-    
+
     // Regulations
     'regulations.title': 'Szabályzatunk',
     'regulations.subtitle': 'Mindenki biztonsága és kényelme érdekében kérjük, tartsd be szabályzatunkat',
-    
+
     // Contact
     'contact.title': 'Kapcsolat',
     'contact.subtitle': 'Itt vagyunk neked! Lépj kapcsolatba velünk foglalásokért vagy bármilyen kérdésért',
-    
+
     // Footer
     'footer.description': 'A tökéletes hely gyerekbulikhoz és családi szórakozáshoz. Felejthetetlen emlékeket teremtünk biztonságos és barátságos környezetben.',
     'footer.quickNav': 'Gyors Navigáció',

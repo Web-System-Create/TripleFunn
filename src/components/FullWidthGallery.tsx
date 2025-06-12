@@ -10,7 +10,7 @@ const FullWidthGallery = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="text-center">
           <h2 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
-            Descoperă Lumea PlayFun 🌟
+            Descoperă Lumea TripleFunn 🌟
           </h2>
           <p className="text-2xl text-gray-700 max-w-4xl mx-auto font-medium">
             O privire în universul nostru magic plin de aventuri, zâmbete și momente de neuitat
@@ -23,7 +23,7 @@ const FullWidthGallery = () => {
         {/* First Row - 3 images */}
         <div className="flex w-full h-80 mb-2">
           {siteData.fullWidthGallery.slice(0, 3).map((image, index) => (
-            <div 
+            <div
               key={image.id}
               className="relative flex-1 group overflow-hidden"
             >
@@ -53,7 +53,7 @@ const FullWidthGallery = () => {
         {/* Second Row - 3 images */}
         <div className="flex w-full h-80">
           {siteData.fullWidthGallery.slice(3, 6).map((image, index) => (
-            <div 
+            <div
               key={image.id}
               className="relative flex-1 group overflow-hidden"
             >
@@ -87,7 +87,7 @@ const FullWidthGallery = () => {
           <div className="bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl p-8 text-white">
             <h3 className="text-3xl font-bold mb-4 flex items-center justify-center">
               <Sparkles className="h-8 w-8 mr-3 text-blue-200" />
-              Vino să trăiești magia! 
+              Vino să trăiești magia!
               <Heart className="h-8 w-8 ml-3 text-pink-300" />
             </h3>
             <p className="text-xl mb-8 opacity-90">

@@ -18,7 +18,7 @@ const Contact = () => {
           <div className="space-y-8">
             <div className="bg-white rounded-2xl p-6 shadow-lg">
               <h3 className="text-2xl font-bold text-gray-800 mb-6">Informații de Contact</h3>
-              
+
               <div className="space-y-6">
                 <div className="flex items-start">
                   <div className="bg-orange-100 p-3 rounded-full mr-4">
@@ -46,7 +46,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800">Email</h4>
-                    <p className="text-gray-600">contact@playfun.ro<br />rezervari@playfun.ro</p>
+                    <p className="text-gray-600">contact@triplefunn.ro<br />rezervari@playfun.ro</p>
                   </div>
                 </div>
 
@@ -81,7 +81,7 @@ const Contact = () => {
 
           <div className="bg-white rounded-2xl p-6 shadow-lg">
             <h3 className="text-2xl font-bold text-gray-800 mb-6">Trimite-ne un Mesaj</h3>
-            
+
             <form className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
