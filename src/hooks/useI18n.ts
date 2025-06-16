@@ -17,7 +17,7 @@ interface UseI18nReturn {
 }
 
 const STORAGE_KEY = 'triple-fun-language';
-const API_BASE_URL = 'http://localhost:3001/api';
+const API_BASE_URL = `${window.location.protocol}//${window.location.hostname}:3001/api`;
 
 export const useI18n = (): UseI18nReturn => {
   const [language, setLanguageState] = useState<Language>(() => {
@@ -39,16 +39,16 @@ export const useI18n = (): UseI18nReturn => {
     const loadTranslations = async () => {
       setIsLoading(true);
       console.log('🌐 Loading translations from local files...');
-      
+
       try {
         const languages: Language[] = ['ro', 'en', 'hu'];
         const loadedTranslations: Record<Language, TranslationData> = {} as Record<Language, TranslationData>;
-        
+
         const loadPromises = languages.map(async (lang) => {
           try {
             console.log(`📥 Loading ${lang} translations...`);
             const response = await fetch(`/i18n/${lang}.json`);
-            
+
             if (response.ok) {
               const data = await response.json();
               console.log(`✅ Successfully loaded ${lang} translations`);
@@ -64,7 +64,7 @@ export const useI18n = (): UseI18nReturn => {
         });
 
         await Promise.all(loadPromises);
-        
+
         console.log('🎯 All translations loaded successfully');
         setTranslations(loadedTranslations);
       } catch (error) {
@@ -264,7 +264,7 @@ export const useI18n = (): UseI18nReturn => {
 
   const getNestedValue = (obj: any, path: string): any => {
     if (!obj || typeof obj !== 'object') return undefined;
-    
+
     return path.split('.').reduce((current, key) => {
       return current && current[key] !== undefined ? current[key] : undefined;
     }, obj);
@@ -275,23 +275,23 @@ export const useI18n = (): UseI18nReturn => {
     if (key === 'language') {
       return language;
     }
-    
+
     // Try to get value from current language
     let value = getNestedValue(translations[language], key);
-    
+
     // If not found, try Romanian as fallback
     if (value === undefined && language !== 'ro') {
       value = getNestedValue(translations.ro, key);
     }
-    
+
     // If still not found, return the key itself
     const result = typeof value === 'string' ? value : key;
-    
+
     // Debug log for missing translations (only in development)
     if (result === key && key !== 'language' && typeof window !== 'undefined' && window.location.hostname === 'localhost') {
       console.warn(`🔍 Missing translation for key: ${key} in language: ${language}`);
     }
-    
+
     return result;
   };
 
@@ -310,7 +310,7 @@ export const useI18n = (): UseI18nReturn => {
   // Update translation in local state (for admin preview)
   const updateTranslation = (key: string, lang: Language, value: string) => {
     console.log(`📝 Updating local translation: ${key} = ${value} (${lang})`);
-    
+
     // Update local state immediately for admin preview
     const newTranslations = JSON.parse(JSON.stringify(translations)); // Deep clone
     setNestedValue(newTranslations[lang], key, value);
@@ -321,7 +321,7 @@ export const useI18n = (): UseI18nReturn => {
   const saveTranslations = async (): Promise<boolean> => {
     try {
       console.log('💾 Saving translations to API (will update JSON files)...');
-      
+
       // Try to save to API - this will modify the actual JSON files
       const response = await fetch(`${API_BASE_URL}/translations/bulk`, {
         method: 'POST',
@@ -330,7 +330,7 @@ export const useI18n = (): UseI18nReturn => {
         },
         body: JSON.stringify({ translations })
       });
-      
+
       if (response.ok) {
         console.log('✅ Translations saved successfully to JSON files via API');
         console.log('🌐 All clients will see changes on next page refresh');
