@@ -1,4 +1,3 @@
-import React from 'react';
 import { MapPin, Phone, Mail, Facebook, Instagram, Heart } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 

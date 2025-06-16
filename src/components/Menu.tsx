@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
-import { Coffee, Utensils, IceCream, Sandwich } from 'lucide-react';
+import { useState } from 'react';
+import { Coffee, Utensils, IceCream } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Menu = () => {
   const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState('copii');
 
-  const menuCategories = {
+  const menuCategories: Record<string, {
+    title: string;
+    icon: React.ComponentType<any>;
+    items: Array<{
+      name: string;
+      description: string;
+      price: string;
+    }>;
+  }> = {
     copii: {
       title: t('menu.categories.kids'),
       icon: IceCream,

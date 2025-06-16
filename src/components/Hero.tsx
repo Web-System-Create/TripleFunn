@@ -1,11 +1,50 @@
-import React from 'react';
 import { Star, Calendar, Sparkles, Heart, Zap } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAdmin } from '../contexts/AdminContext';
 
 const Hero = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { siteData } = useAdmin();
+
+  // Smooth scroll function
+  const smoothScrollTo = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      const headerHeight = 80; // Approximate header height
+      const elementPosition = element.offsetTop - headerHeight;
+      
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // WhatsApp booking function - FIXED with proper null checks
+  const handleBookingWhatsApp = () => {
+    // Check if whatsapp number exists
+    if (!siteData?.contact?.whatsapp) {
+      console.warn('WhatsApp number not available');
+      return;
+    }
+
+    const message = siteData.whatsappMessages?.booking?.[language] || 
+                   siteData.whatsappMessages?.booking?.ro || 
+                   '🎉 Salut! Vreau să rezerv o petrecere la Triple Fun! Vă rog să mă contactați pentru detalii. Mulțumesc!';
+    
+    // Clean phone number (remove any spaces, dashes, etc.) with null check
+    const cleanPhone = siteData.contact.whatsapp.replace(/\D/g, '');
+    
+    // Check if cleanPhone is not empty
+    if (!cleanPhone) {
+      console.warn('Invalid WhatsApp number');
+      return;
+    }
+    
+    // Create proper WhatsApp URL
+    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
 
   return (
     <section id="home" className="relative bg-gradient-to-br from-blue-400 via-purple-500 via-pink-500 to-purple-600 min-h-screen flex items-center overflow-hidden">
@@ -46,13 +85,19 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 mb-12">
-              <button className="bg-white text-purple-700 px-12 py-6 rounded-full font-bold text-2xl hover:bg-gray-100 hover:text-purple-800 transition-all transform hover:scale-110 shadow-2xl border-4 border-white relative overflow-hidden group">
+              <button 
+                onClick={handleBookingWhatsApp}
+                className="bg-white text-purple-700 px-12 py-6 rounded-full font-bold text-2xl hover:bg-gray-100 hover:text-purple-800 transition-all transform hover:scale-110 shadow-2xl border-4 border-white relative overflow-hidden group"
+              >
                 <span className="relative z-10 flex items-center justify-center">
                   {t('hero.ctaBook')} 🎉
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-orange-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               </button>
-              <button className="border-4 border-white text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-white hover:text-purple-600 transition-all transform hover:scale-105 shadow-xl">
+              <button 
+                onClick={() => smoothScrollTo('menu')}
+                className="border-4 border-white text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-white hover:text-purple-600 transition-all transform hover:scale-105 shadow-xl"
+              >
                 {t('hero.ctaMenu')} 🍕
               </button>
             </div>

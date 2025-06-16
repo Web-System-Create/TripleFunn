@@ -1,5 +1,4 @@
-import React from 'react';
-import { Check, Star, Crown, Gift } from 'lucide-react';
+import { Check, MessageCircle } from 'lucide-react';
 import { useAdmin } from '../contexts/AdminContext';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -7,10 +6,18 @@ const Pricing = () => {
   const { siteData } = useAdmin();
   const { t } = useLanguage();
 
-  const iconMap = {
-    'Gift': Gift,
-    'Star': Star,
-    'Crown': Crown
+  // WhatsApp booking function - FIXED
+  const handleBookingWhatsApp = (packageName: string) => {
+    const message = `🎉 Salut! Vreau să rezerv pachetul "${packageName}" la Triple Fun! 
+
+Vă rog să mă contactați pentru detalii și disponibilitate.
+
+Mulțumesc!`;
+
+    // Clean phone number and create proper WhatsApp URL
+    const cleanPhone = siteData.contact.whatsapp.replace(/\D/g, '');
+    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
@@ -26,10 +33,7 @@ const Pricing = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-8">
-          {siteData.pricing.map((pkg, index) => {
-            const IconComponent = pkg.name.includes('Basic') ? Gift : 
-                                 pkg.name.includes('Standard') ? Star : Crown;
-            
+          {siteData.pricing.map((pkg) => {
             return (
               <div 
                 key={pkg.id}
@@ -46,13 +50,6 @@ const Pricing = () => {
                 )}
 
                 <div className="text-center mb-8">
-                  <div className={`inline-flex p-4 rounded-full mb-4 ${
-                    pkg.popular ? 'bg-purple-100' : 'bg-gray-100'
-                  }`}>
-                    <IconComponent className={`h-8 w-8 ${
-                      pkg.popular ? 'text-purple-500' : 'text-gray-600'
-                    }`} />
-                  </div>
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">{pkg.name}</h3>
                   <p className="text-gray-600 mb-4">{pkg.description}</p>
                   <div className="mb-4">
@@ -71,9 +68,13 @@ const Pricing = () => {
                   ))}
                 </ul>
 
-                <button className={`w-full ${
-                  pkg.popular ? 'bg-purple-500 hover:bg-purple-600' : 'bg-gray-600 hover:bg-gray-700'
-                } text-white py-4 rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg`}>
+                <button 
+                  onClick={() => handleBookingWhatsApp(pkg.name)}
+                  className={`w-full ${
+                    pkg.popular ? 'bg-purple-500 hover:bg-purple-600' : 'bg-gray-600 hover:bg-gray-700'
+                  } text-white py-4 rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg flex items-center justify-center`}
+                >
+                  <MessageCircle className="h-5 w-5 mr-2" />
                   {t('pricing.book')}
                 </button>
               </div>

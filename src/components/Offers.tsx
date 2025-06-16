@@ -1,9 +1,10 @@
-import React from 'react';
-import { Percent, Clock, Users, Calendar } from 'lucide-react';
+import { Percent, Clock, Users, Calendar, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAdmin } from '../contexts/AdminContext';
 
 const Offers = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const { siteData } = useAdmin();
 
   const offers = [
     {
@@ -39,6 +40,27 @@ const Offers = () => {
       bgColor: 'bg-indigo-50'
     }
   ];
+
+  // WhatsApp functions - FIXED
+  const handleCallWhatsApp = () => {
+    const message = siteData.whatsappMessages?.contact?.[language] || 
+                   siteData.whatsappMessages?.contact?.ro || 
+                   '📞 Salut! Am o întrebare despre Triple Fun. Vă rog să mă contactați. Mulțumesc!';
+    
+    const cleanPhone = siteData.contact.whatsapp.replace(/\D/g, '');
+    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const handleBookingWhatsApp = () => {
+    const message = siteData.whatsappMessages?.booking?.[language] || 
+                   siteData.whatsappMessages?.booking?.ro || 
+                   '🎉 Salut! Vreau să rezerv o petrecere la Triple Fun! Vă rog să mă contactați pentru detalii. Mulțumesc!';
+    
+    const cleanPhone = siteData.contact.whatsapp.replace(/\D/g, '');
+    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
 
   return (
     <section id="offers" className="py-20 bg-white">
@@ -78,10 +100,18 @@ const Offers = () => {
             {t('offers.cta.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-500 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105">
+            <button 
+              onClick={handleCallWhatsApp}
+              className="bg-white text-blue-500 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 flex items-center justify-center"
+            >
+              <MessageCircle className="h-5 w-5 mr-2" />
               {t('offers.cta.call')}
             </button>
-            <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-500 transition-all">
+            <button 
+              onClick={handleBookingWhatsApp}
+              className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-500 transition-all flex items-center justify-center"
+            >
+              <MessageCircle className="h-5 w-5 mr-2" />
               {t('offers.cta.whatsapp')}
             </button>
           </div>

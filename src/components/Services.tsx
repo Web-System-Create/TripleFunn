@@ -1,4 +1,3 @@
-import React from 'react';
 import { Gamepad2, PartyPopper, Cake, Users, Shield, Music, Edit } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAdmin } from '../contexts/AdminContext';

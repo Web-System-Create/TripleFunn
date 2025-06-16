@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone, Globe, Settings, LogOut, ChevronUp } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Menu, X, Phone, Globe, Settings, LogOut, ChevronUp, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAdmin } from '../contexts/AdminContext';
 import AdminPanel from './AdminPanel';
@@ -12,7 +12,7 @@ const Header = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const { language, setLanguage, t } = useLanguage();
-  const { siteData, isAdmin, isLoggedIn, login, logout } = useAdmin();
+  const { siteData, isLoggedIn, login, logout } = useAdmin();
 
   const languages = [
     { code: 'ro', name: 'Română', flag: '🇷🇴' },
@@ -80,7 +80,51 @@ const Header = () => {
 
   // Call function
   const makeCall = () => {
-    window.location.href = `tel:${siteData.contact.phone}`;
+    if (siteData?.contact?.phone) {
+      window.location.href = `tel:${siteData.contact.phone}`;
+    }
+  };
+
+  // WhatsApp function - COMPLETELY FIXED with proper error handling
+  const openWhatsApp = () => {
+    console.log('WhatsApp button clicked!'); // Debug log
+    
+    // Check if siteData and contact exist
+    if (!siteData?.contact?.whatsapp) {
+      console.warn('WhatsApp number not available in siteData:', siteData);
+      alert('Numărul WhatsApp nu este disponibil momentan. Vă rugăm să sunați la 0748 55 99 79');
+      return;
+    }
+
+    // Get message with proper fallback
+    const message = siteData.whatsappMessages?.contact?.[language] || 
+                   siteData.whatsappMessages?.contact?.ro || 
+                   '📞 Salut! Am o întrebare despre Triple Fun. Vă rog să mă contactați. Mulțumesc!';
+    
+    console.log('WhatsApp message:', message); // Debug log
+    
+    // Clean phone number with proper null checks
+    const cleanPhone = siteData.contact.whatsapp.replace(/\D/g, '');
+    console.log('Clean phone number:', cleanPhone); // Debug log
+    
+    // Only proceed if we have a valid phone number
+    if (cleanPhone && cleanPhone.length > 0) {
+      // Create proper WhatsApp URL
+      const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+      console.log('WhatsApp URL:', whatsappUrl); // Debug log
+      
+      // Try to open WhatsApp
+      try {
+        window.open(whatsappUrl, '_blank');
+        console.log('WhatsApp opened successfully!'); // Debug log
+      } catch (error) {
+        console.error('Error opening WhatsApp:', error);
+        alert('Nu s-a putut deschide WhatsApp. Vă rugăm să încercați din nou.');
+      }
+    } else {
+      console.warn('Invalid WhatsApp number:', siteData.contact.whatsapp);
+      alert('Numărul WhatsApp nu este valid. Vă rugăm să sunați la 0748 55 99 79');
+    }
   };
 
   // Navigation items with smooth scroll (removed 'home')
@@ -119,7 +163,7 @@ const Header = () => {
             <div className="hidden md:flex items-center space-x-4">
               <div className="flex items-center text-sm text-white bg-white bg-opacity-20 px-3 py-2 rounded-full backdrop-blur-sm">
                 <Phone className="h-4 w-4 mr-2" />
-                <span>{siteData.contact.phone}</span>
+                <span>{siteData?.contact?.phone || '0748 55 99 79'}</span>
               </div>
               
               <div className="flex items-center space-x-2">
@@ -265,18 +309,27 @@ const Header = () => {
         )}
       </header>
 
-      {/* Floating Action Buttons - Scroll to Top & Call */}
+      {/* Floating Action Buttons - ORDINEA CORECTĂ: WhatsApp, Call, Scroll Up */}
       <div className="fixed bottom-6 right-6 z-40 flex flex-col space-y-3">
-        {/* Call Button */}
+        {/* 1. WhatsApp Button - VERDE (primul) */}
+        <button
+          onClick={openWhatsApp}
+          className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 group"
+          title="Trimite mesaj WhatsApp"
+        >
+          <MessageCircle className="h-6 w-6 group-hover:animate-pulse" />
+        </button>
+
+        {/* 2. Call Button - ALBASTRU-MOV (al doilea) */}
         <button
           onClick={makeCall}
           className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 group"
-          title={`Sună: ${siteData.contact.phone}`}
+          title={`Sună: ${siteData?.contact?.phone || '0748 55 99 79'}`}
         >
           <Phone className="h-6 w-6 group-hover:animate-pulse" />
         </button>
 
-        {/* Scroll to Top Button */}
+        {/* 3. Scroll to Top Button - MOV-ROZ (al treilea) */}
         {showScrollTop && (
           <button
             onClick={scrollToTop}

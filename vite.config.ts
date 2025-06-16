@@ -19,14 +19,23 @@ export default defineConfig({
     },
     chunkSizeWarningLimit: 1000,
     minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+      format: {
+        comments: false,
+      },
+    },
     sourcemap: false,
     target: 'es2015'
   },
   server: {
     host: '0.0.0.0',
-    port: process.env.NODE_ENV === 'production' ? 80 : 5173,
+    port: 5173,
     hmr: {
-      port: process.env.NODE_ENV === 'production' ? 80 : 5173
+      port: 5173
     }
   },
   preview: {

@@ -5,8 +5,21 @@ interface SiteData {
   siteName: string;
   contact: {
     phone: string;
+    whatsapp: string;
     email: string;
     address: string;
+  };
+  whatsappMessages: {
+    booking: {
+      ro: string;
+      en: string;
+      hu: string;
+    };
+    contact: {
+      ro: string;
+      en: string;
+      hu: string;
+    };
   };
   schedule: {
     [key: string]: string;
@@ -124,443 +137,8 @@ interface AdminContextType {
   logout: () => void;
   updateMultilingualContent: (key: string, language: string, value: string) => void;
   getMultilingualContent: (key: string, language: string) => string;
+  isLoading: boolean;
 }
-
-const defaultSiteData: SiteData = {
-  logo: 'TF',
-  siteName: 'Triple Fun',
-  contact: {
-    phone: '0748 55 99 79',
-    email: 'contact@triplefun.ro',
-    address: 'Strada Jocului Nr. 15, București, Sector 1, 010101'
-  },
-  schedule: {
-    'Luni - Joi': '10:00 - 20:00',
-    'Vineri': '10:00 - 22:00',
-    'Sâmbătă - Duminică': '09:00 - 22:00'
-  },
-  hero: {
-    title: 'Cea mai distractivă petrecere',
-    subtitle: 'Locul perfect pentru petreceri de copii, evenimente speciale și distracție în familie. Oferim experiențe memorabile într-un mediu sigur și prietenos.'
-  },
-  services: [
-    {
-      id: '1',
-      title: 'Zone de Joacă Exterior',
-      description: 'Spațiu verde în aer liber cu parc de joacă cu tobogan, hinte, tiroliana și gonflabil 9x5x7.',
-      icon: 'Gamepad2',
-      color: 'bg-orange-500'
-    },
-    {
-      id: '2',
-      title: 'Piscină Încălzită',
-      description: 'Piscină încălzită 9x5x1.45 pentru distracție în siguranță în orice anotimp.',
-      icon: 'PartyPopper',
-      color: 'bg-pink-500'
-    },
-    {
-      id: '3',
-      title: 'Petreceri Private',
-      description: 'Organizăm petreceri de neuitat cu animatori profesioniști, decorațiuni și programe personalizate.',
-      icon: 'Cake',
-      color: 'bg-purple-500'
-    },
-    {
-      id: '4',
-      title: 'Catering Complet',
-      description: 'Meniu bogat pentru copii și adulți, torturi personalizate și băuturi pentru toate gusturile.',
-      icon: 'Music',
-      color: 'bg-blue-500'
-    },
-    {
-      id: '5',
-      title: 'Siguranță Maximă',
-      description: 'Toate echipamentele sunt verificate zilnic, iar personalul este instruit pentru siguranța copiilor.',
-      icon: 'Shield',
-      color: 'bg-green-500'
-    },
-    {
-      id: '6',
-      title: 'Evenimente Corporate',
-      description: 'Organizăm team building-uri și evenimente corporate într-un cadru relaxant și distractiv.',
-      icon: 'Users',
-      color: 'bg-indigo-500'
-    }
-  ],
-  menu: {
-    copii: {
-      title: 'Meniu Copii',
-      items: [
-        { name: 'Crispy din mușchiuleț de pui', description: '2 bucăți (100g) + 100g cartofi prăjiți + băutură la alegere', price: '27 lei' },
-        { name: 'Pizza Margherita (mini)', description: 'Pizza specială pentru copii', price: '20 lei' },
-        { name: 'Paste cu sos de roșii', description: 'Porție de copil cu parmezan', price: '18 lei' },
-        { name: 'Sandwich cu șuncă și cașcaval', description: 'Pe pâine toast cu cartofi', price: '15 lei' },
-        { name: 'Înghețată 3 bile', description: 'Vanilie, ciocolată, căpșuni', price: '12 lei' },
-        { name: 'Tort personalizat', description: 'Comandă specială (min. 1kg)', price: '150 lei' }
-      ]
-    },
-    adulti: {
-      title: 'Meniu Adulți',
-      items: [
-        { name: 'Platou Grătar Mixt (10 persoane)', description: '10 buc crispy pui + 10 buc ceafă + 10 buc mici + 650g cartofi prăjiți', price: '350 lei' },
-        { name: 'Platou Salamuri și Brânzeturi (10 persoane)', description: 'Salamuri și brânzeturi italiene (2kg) servite cu focaccia', price: '280 lei' },
-        { name: 'Burger Classic', description: 'Carne de vită, bacon, cașcaval, cartofi', price: '35 lei' },
-        { name: 'Salată Caesar', description: 'Cu pui, crutoane, parmezan', price: '28 lei' },
-        { name: 'Pizza Quattro Stagioni', description: 'Șuncă, ciuperci, măsline, ardei', price: '32 lei' },
-        { name: 'Paste Carbonara', description: 'Cu bacon și parmezan', price: '30 lei' }
-      ]
-    },
-    bauturi: {
-      title: 'Băuturi',
-      items: [
-        { name: 'Sucuri naturale', description: 'Portocale, mere, morcovi', price: '8 lei' },
-        { name: 'Limonadă fresh', description: 'Preparată în casă', price: '10 lei' },
-        { name: 'Cafea espresso', description: 'Blend premium', price: '6 lei' },
-        { name: 'Ceai vrac', description: 'Diverse arome', price: '5 lei' },
-        { name: 'Smoothie fructe', description: 'Banane, căpșuni, mango', price: '15 lei' },
-        { name: 'Apă minerală', description: '0.5L sau 1.5L', price: '4-6 lei' }
-      ]
-    }
-  },
-  pricing: [
-    {
-      id: '1',
-      name: 'Pachet Basic',
-      price: '199',
-      duration: '2 ore',
-      description: 'Perfect pentru petreceri mici',
-      features: [
-        'Acces la toate zonele de joacă',
-        'Masă rezervată pentru 2 ore',
-        'Decorațiuni de bază',
-        'Până la 10 copii',
-        'Tort simplu inclus'
-      ],
-      popular: false
-    },
-    {
-      id: '2',
-      name: 'Pachet Standard',
-      price: '349',
-      duration: '3 ore',
-      description: 'Cel mai popular pachet',
-      features: [
-        'Acces la toate zonele de joacă',
-        'Masă rezervată pentru 3 ore',
-        'Decorațiuni tematice',
-        'Până la 15 copii',
-        'Animator 1 oră',
-        'Tort personalizat',
-        'Foto cu mascota'
-      ],
-      popular: true
-    },
-    {
-      id: '3',
-      name: 'Pachet Premium',
-      price: '549',
-      duration: '4 ore',
-      description: 'Experiența completă',
-      features: [
-        'Acces exclusiv la zona VIP',
-        'Masă rezervată pentru 4 ore',
-        'Decorațiuni premium',
-        'Până la 25 copii',
-        'Animator profesionist 2 ore',
-        'Tort de lux personalizat',
-        'Sesiune foto profesională',
-        'Cadouri pentru copii',
-        'Meniu complet inclus'
-      ],
-      popular: false
-    },
-    {
-      id: '4',
-      name: 'Pachet Triple Fun',
-      price: '1700',
-      duration: '4 ore',
-      description: 'Exterior + Piscină - Experiența completă',
-      features: [
-        'Locul de joacă exterior și piscină (1500 m.p.)',
-        'Spațiu verde în aer liber',
-        'Parc de joacă cu tobogan, hinte, tiroliana',
-        'Gonflabil 9x5x7 (LxIxh)',
-        'Piscină încălzită 9x5x1.45 (LxIxh)',
-        'Limită 50 copii și adulți',
-        'Veselă adulți și copii inclusă',
-        'Șampanie pentru copii',
-        'Photo corner',
-        'Cifră pentru sărbătorit'
-      ],
-      popular: false
-    }
-  ],
-  offers: [
-    {
-      id: '1',
-      title: '20% Reducere Luni-Joi',
-      description: 'Rezervă petrecerea între Luni și Joi și primești 20% reducere la toate pachetele!',
-      validUntil: 'Valabil până pe 31 Decembrie 2024',
-      color: 'bg-green-500'
-    },
-    {
-      id: '2',
-      title: 'Al 2-lea Copil GRATUIT',
-      description: 'Pentru rezervări de grup (minimum 20 copii), al 2-lea copil participă gratuit!',
-      validUntil: 'Ofertă permanentă',
-      color: 'bg-blue-500'
-    },
-    {
-      id: '3',
-      title: 'Pachet Aniversar Complet',
-      description: 'Rezervă cu 30 zile înainte și primești decorațiuni tematice și tort personalizat GRATUIT!',
-      validUntil: 'Pentru rezervări în avans',
-      color: 'bg-purple-500'
-    },
-    {
-      id: '4',
-      title: 'Happy Hour 10-14',
-      description: 'Între orele 10:00-14:00, toate băuturile și gustările sunt cu 30% mai ieftine!',
-      validUntil: 'În fiecare zi',
-      color: 'bg-orange-500'
-    }
-  ],
-  gallery: [
-    {
-      id: '1',
-      url: '/WhatsApp Image 2025-06-10 at 09.16.42.jpeg',
-      title: 'Pachet Triple Fun - Exterior + Piscină',
-      category: 'playground'
-    },
-    {
-      id: '2',
-      url: '/WhatsApp Image 2025-06-10 at 09.16.43 (1).jpeg',
-      title: 'Platou Salamuri și Brânzeturi',
-      category: 'food'
-    },
-    {
-      id: '3',
-      url: '/WhatsApp Image 2025-06-10 at 09.16.43 (2).jpeg',
-      title: 'Platou Grătar Mixt',
-      category: 'food'
-    },
-    {
-      id: '4',
-      url: '/WhatsApp Image 2025-06-10 at 09.16.43 (3).jpeg',
-      title: 'Meniu Copil - Crispy Pui',
-      category: 'food'
-    },
-    {
-      id: '5',
-      url: '/WhatsApp Image 2025-06-10 at 09.16.43 (4).jpeg',
-      title: 'Meniu Copil - Varianta cu Apă',
-      category: 'food'
-    }
-  ],
-  fullWidthGallery: [
-    {
-      id: '1',
-      url: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      title: 'Zona de joacă principală',
-      description: 'Tobogane moderne și zone sigure'
-    },
-    {
-      id: '2',
-      url: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      title: 'Petreceri magice',
-      description: 'Atmosferă de basm pentru copii'
-    },
-    {
-      id: '3',
-      url: 'https://images.pexels.com/photos/1148999/pexels-photo-1148999.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      title: 'Animatori profesioniști',
-      description: 'Echipa noastră de specialiști'
-    },
-    {
-      id: '4',
-      url: 'https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      title: 'Evenimente speciale',
-      description: 'Sărbători de neuitat'
-    },
-    {
-      id: '5',
-      url: 'https://images.pexels.com/photos/1640775/pexels-photo-1640775.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      title: 'Spații moderne',
-      description: 'Design contemporan și sigur'
-    },
-    {
-      id: '6',
-      url: 'https://images.pexels.com/photos/1640776/pexels-photo-1640776.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      title: 'Distracție garantată',
-      description: 'Zâmbete și bucurie pentru toți'
-    }
-  ],
-  regulations: [
-    {
-      id: '1',
-      icon: 'Users',
-      title: 'Vârsta și Accesul',
-      items: [
-        'Spațiul de distracție este destinat copiilor cu vârsta cuprinsă între 1 și 14 ani',
-        'Părinții/Însoțitorii sunt obligați să aducă la cunoștință copiilor și însoțitorilor invitați prevederile prezentului regulament',
-        'Daunele produse vor fi suportate de către cei care au închiriat locația/le-au produs'
-      ],
-      color: 'bg-blue-500',
-      bgColor: 'bg-blue-50'
-    },
-    {
-      id: '2',
-      icon: 'Shield',
-      title: 'Încălțăminte și Igienă',
-      items: [
-        'Accesul copiilor în spațiul de joacă este permis doar cu încălțări de schimb neutilizate în exterior (papuci de casă, botoșei, șosete curate)',
-        'Accesul adulților în spațiul de joacă este permis doar cu protecție încălțăminte de unică folosință (disponibilă gratuit la intrare)',
-        'Toți utilizatorii își vor spăla și dezinfecta mâinile înainte de joacă, precum și după folosirea WC-ului'
-      ],
-      color: 'bg-green-500',
-      bgColor: 'bg-green-50'
-    },
-    {
-      id: '3',
-      icon: 'AlertTriangle',
-      title: 'Obiecte Interzise',
-      items: [
-        'Este interzis accesul în zona copiilor cu obiecte mici sau ascuțite care pot deteriora elementele de joacă (cuțite, creioane, agrafe, monezi, cordoane, brățări, cercei mari, lanțuri, etc.)',
-        'Prin nerespectarea acestei reguli, adulții care au adus copiii își asumă întreaga responsabilitate în eventualele incidente',
-        'Este interzis accesul cu guma de mestecat, acadele și înghețată în zona de joacă'
-      ],
-      color: 'bg-red-500',
-      bgColor: 'bg-red-50'
-    },
-    {
-      id: '4',
-      icon: 'XCircle',
-      title: 'Mâncare și Băuturi',
-      items: [
-        'Este interzis accesul și consumul de mâncare sau băuturi în zona de joacă',
-        'Acestea se consumă doar la mesele din zona de luat masa',
-        'Nu sunt acceptați copii bolnavi în incinta locului de joacă'
-      ],
-      color: 'bg-orange-500',
-      bgColor: 'bg-orange-50'
-    },
-    {
-      id: '5',
-      icon: 'Heart',
-      title: 'Comportament și Siguranță',
-      items: [
-        'Nu sunt admise: comportamentul violent, jocurile agresive sau loviturile aplicate copiilor',
-        'Vă rugăm să utilizați echipamentele de joacă și jucăriile conform scopului lor și cu respect pentru ceilalți',
-        'Părinții sunt direct răspunzători de toți copiii pe care îi invită la petrecerile organizate'
-      ],
-      color: 'bg-purple-500',
-      bgColor: 'bg-purple-50'
-    },
-    {
-      id: '6',
-      icon: 'Clock',
-      title: 'Rezervări și Plăți',
-      items: [
-        'Cu 48h înainte de eveniment, comunicați numărul total de persoane participante la tel: 0748 55 99 79',
-        'Avansul nu se returnează',
-        'În cazul daunelor materiale din neglijență, se va achita contravaloarea obiectelor deteriorate'
-      ],
-      color: 'bg-indigo-500',
-      bgColor: 'bg-indigo-50'
-    },
-    {
-      id: '7',
-      icon: 'Camera',
-      title: 'Filmări și Fotografii',
-      items: [
-        'În acest spațiu SE VA FILMA/FOTOGRAFIA în cadrul evenimentelor pentru distribuirea pe rețelele de socializare',
-        'Prin participarea la evenimente vă exprimați acordul privind cele de mai sus',
-        'Dacă nu doriți acest lucru, vă rugăm să ne comunicați verbal și în scris'
-      ],
-      color: 'bg-pink-500',
-      bgColor: 'bg-pink-50'
-    }
-  ],
-  regulationTexts: {
-    warningTitle: {
-      ro: '⚠️ ATENȚIE IMPORTANTĂ ⚠️',
-      en: '⚠️ IMPORTANT WARNING ⚠️',
-      hu: '⚠️ FONTOS FIGYELMEZTETÉS ⚠️'
-    },
-    warningText: {
-      ro: 'NERESPECTAREA REGULILOR ATRAGE DUPĂ SINE O TAXĂ SUPLIMENTARĂ DE 300 LEI (reprezentând taxa de curățenie)',
-      en: 'NON-COMPLIANCE WITH RULES RESULTS IN AN ADDITIONAL FEE OF 300 LEI (representing cleaning fee)',
-      hu: 'A SZABÁLYOK BE NEM TARTÁSA 300 LEI PÓTDÍJAT VON MAGA UTÁN (takarítási díj)'
-    },
-    refusalTitle: {
-      ro: 'Dreptul de Refuz',
-      en: 'Right of Refusal',
-      hu: 'Elutasítás Joga'
-    },
-    refusalText: {
-      ro: 'Ne rezervăm dreptul de a interzice accesul oricărei persoane care nu respectă regulamentele de securitate sau prezintă un comportament agresiv sau periculos. În cazul nerespectării prezentului regulament, ne vedem obligați să evacuăm persoanele în cauză și să le interzicem accesul în incinta locului de joacă.',
-      en: 'We reserve the right to deny access to any person who does not comply with safety regulations or exhibits aggressive or dangerous behavior. In case of non-compliance with these regulations, we are obliged to evacuate the persons in question and prohibit their access to the playground premises.',
-      hu: 'Fenntartjuk a jogot, hogy megtagadjuk a belépést bármely személytől, aki nem tartja be a biztonsági előírásokat, vagy agresszív vagy veszélyes viselkedést tanúsít. A jelen szabályzat be nem tartása esetén kénytelenek vagyunk kiutasítani az érintett személyeket és megtiltani számukra a játszótér területére való belépést.'
-    },
-    acceptanceText: {
-      ro: '🚪 INTRAREA ÎN SALA DE JOACĂ SE CONSIDERĂ ACCEPTUL DVS. A TERMENILOR ȘI CONDIȚIILOR!',
-      en: '🚪 ENTERING THE PLAYGROUND IS CONSIDERED YOUR ACCEPTANCE OF THE TERMS AND CONDITIONS!',
-      hu: '🚪 A JÁTSZÓTÉRRE VALÓ BELÉPÉS A FELTÉTELEK ÉS SZABÁLYOK ELFOGADÁSÁNAK MINŐSÜL!'
-    },
-    thankYouTitle: {
-      ro: 'VĂ MULȚUMIM! 🙏',
-      en: 'THANK YOU! 🙏',
-      hu: 'KÖSZÖNJÜK! 🙏'
-    },
-    thankYouText: {
-      ro: 'Pentru înțelegere și pentru că ne ajutați să menținem Triple Fun un loc sigur și distractiv pentru toți copiii!',
-      en: 'For your understanding and for helping us keep Triple Fun a safe and fun place for all children!',
-      hu: 'A megértésért és azért, hogy segítenek nekünk a Triple Fun-t biztonságos és szórakoztató hellyé tenni minden gyerek számára!'
-    }
-  },
-  multilingualContent: {
-    'hero.title.main': {
-      ro: 'Cea mai',
-      en: 'The most',
-      hu: 'A leg'
-    },
-    'hero.title.highlight': {
-      ro: 'distractivă',
-      en: 'fun',
-      hu: 'szórakoztatóbb'
-    },
-    'hero.title.end': {
-      ro: 'petrecere',
-      en: 'party',
-      hu: 'buli'
-    },
-    'hero.subtitle': {
-      ro: 'Locul perfect pentru petreceri de copii, evenimente speciale și distracție în familie. Oferim experiențe memorabile într-un mediu sigur și prietenos.',
-      en: 'The perfect place for children\'s parties, special events and family fun. We offer memorable experiences in a safe and friendly environment.',
-      hu: 'A tökéletes hely gyerekbulikhoz, különleges eseményekhez és családi szórakozáshoz. Emlékezetes élményeket kínálunk biztonságos és barátságos környezetben.'
-    },
-    'services.title': {
-      ro: 'Serviciile Noastre',
-      en: 'Our Services',
-      hu: 'Szolgáltatásaink'
-    },
-    'services.subtitle': {
-      ro: 'Oferim o gamă completă de servicii pentru a face experiența ta și a copilului tău una specială',
-      en: 'We offer a complete range of services to make your and your child\'s experience special',
-      hu: 'Teljes körű szolgáltatásokat kínálunk, hogy a te és gyermeked élménye különleges legyen'
-    },
-    'regulations.title': {
-      ro: 'Regulamentul Triple Fun',
-      en: 'Triple Fun Regulations',
-      hu: 'Triple Fun Szabályzat'
-    },
-    'regulations.subtitle': {
-      ro: 'Pentru siguranța și confortul tuturor, vă rugăm să respectați regulamentul nostru',
-      en: 'For everyone\'s safety and comfort, please follow our regulations',
-      hu: 'Mindenki biztonsága és kényelme érdekében kérjük, tartsd be szabályzatunkat'
-    }
-  }
-};
 
 const ADMIN_CREDENTIALS = {
   username: 'admin',
@@ -572,21 +150,8 @@ const STORAGE_KEY = 'triple-fun-site-data';
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
 
 export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [siteData, setSiteData] = useState<SiteData>(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (stored) {
-          const parsedData = JSON.parse(stored);
-          return { ...defaultSiteData, ...parsedData };
-        }
-      } catch (error) {
-        console.error('Error loading stored data:', error);
-      }
-    }
-    return defaultSiteData;
-  });
-
+  const [siteData, setSiteData] = useState<SiteData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -595,8 +160,124 @@ export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     return false;
   });
 
+  // Load default site data from JSON file
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    const loadDefaultSiteData = async () => {
+      setIsLoading(true);
+      try {
+        // Try to load from localStorage first
+        if (typeof window !== 'undefined') {
+          const stored = localStorage.getItem(STORAGE_KEY);
+          if (stored) {
+            const parsedData = JSON.parse(stored);
+            setSiteData(parsedData);
+            setIsLoading(false);
+            return;
+          }
+        }
+
+        // If no localStorage data, load from JSON file
+        const response = await fetch('/data/defaultSiteData.json');
+        if (response.ok) {
+          const defaultData = await response.json();
+          setSiteData(defaultData);
+        } else {
+          console.error('Failed to load default site data');
+          // Fallback to minimal data structure
+          setSiteData({
+            logo: 'TF',
+            siteName: 'Triple Fun',
+            contact: {
+              phone: '0748 55 99 79',
+              whatsapp: '40748559979',
+              email: 'contact@triplefun.ro',
+              address: 'Strada Jocului Nr. 15, București'
+            },
+            whatsappMessages: {
+              booking: {
+                ro: '🎉 Salut! Vreau să rezerv o petrecere la Triple Fun!',
+                en: '🎉 Hello! I want to book a party at Triple Fun!',
+                hu: '🎉 Szia! Szeretnék bulit foglalni a Triple Fun-ban!'
+              },
+              contact: {
+                ro: '📞 Salut! Am o întrebare despre Triple Fun.',
+                en: '📞 Hello! I have a question about Triple Fun.',
+                hu: '📞 Szia! Kérdésem van a Triple Fun-nal kapcsolatban.'
+              }
+            },
+            schedule: {},
+            hero: { title: '', subtitle: '' },
+            services: [],
+            menu: {},
+            pricing: [],
+            offers: [],
+            gallery: [],
+            fullWidthGallery: [],
+            regulationTexts: {
+              warningTitle: { ro: '', en: '', hu: '' },
+              warningText: { ro: '', en: '', hu: '' },
+              refusalTitle: { ro: '', en: '', hu: '' },
+              refusalText: { ro: '', en: '', hu: '' },
+              acceptanceText: { ro: '', en: '', hu: '' },
+              thankYouTitle: { ro: '', en: '', hu: '' },
+              thankYouText: { ro: '', en: '', hu: '' }
+            },
+            multilingualContent: {}
+          });
+        }
+      } catch (error) {
+        console.error('Error loading default site data:', error);
+        setSiteData({
+          logo: 'TF',
+          siteName: 'Triple Fun',
+          contact: {
+            phone: '0748 55 99 79',
+            whatsapp: '40748559979',
+            email: 'contact@triplefun.ro',
+            address: 'Strada Jocului Nr. 15, București'
+          },
+          whatsappMessages: {
+            booking: {
+              ro: '🎉 Salut! Vreau să rezerv o petrecere la Triple Fun!',
+              en: '🎉 Hello! I want to book a party at Triple Fun!',
+              hu: '🎉 Szia! Szeretnék bulit foglalni a Triple Fun-ban!'
+            },
+            contact: {
+              ro: '📞 Salut! Am o întrebare despre Triple Fun.',
+              en: '📞 Hello! I have a question about Triple Fun.',
+              hu: '📞 Szia! Kérdésem van a Triple Fun-nal kapcsolatban.'
+            }
+          },
+          schedule: {},
+          hero: { title: '', subtitle: '' },
+          services: [],
+          menu: {},
+          pricing: [],
+          offers: [],
+          gallery: [],
+          fullWidthGallery: [],
+          regulationTexts: {
+            warningTitle: { ro: '', en: '', hu: '' },
+            warningText: { ro: '', en: '', hu: '' },
+            refusalTitle: { ro: '', en: '', hu: '' },
+            refusalText: { ro: '', en: '', hu: '' },
+            acceptanceText: { ro: '', en: '', hu: '' },
+            thankYouTitle: { ro: '', en: '', hu: '' },
+            thankYouText: { ro: '', en: '', hu: '' }
+          },
+          multilingualContent: {}
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadDefaultSiteData();
+  }, []);
+
+  // Save to localStorage when siteData changes
+  useEffect(() => {
+    if (siteData && typeof window !== 'undefined') {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(siteData));
       } catch (error) {
@@ -612,27 +293,31 @@ export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   }, [isLoggedIn]);
 
   const updateSiteData = (data: Partial<SiteData>) => {
-    setSiteData(prev => {
-      const newData = { ...prev, ...data };
-      return newData;
-    });
+    if (siteData) {
+      setSiteData(prev => {
+        const newData = { ...prev!, ...data };
+        return newData;
+      });
+    }
   };
 
   const updateMultilingualContent = (key: string, language: string, value: string) => {
-    setSiteData(prev => ({
-      ...prev,
-      multilingualContent: {
-        ...prev.multilingualContent,
-        [key]: {
-          ...prev.multilingualContent[key],
-          [language]: value
+    if (siteData) {
+      setSiteData(prev => ({
+        ...prev!,
+        multilingualContent: {
+          ...prev!.multilingualContent,
+          [key]: {
+            ...prev!.multilingualContent[key],
+            [language]: value
+          }
         }
-      }
-    }));
+      }));
+    }
   };
 
   const getMultilingualContent = (key: string, language: string): string => {
-    return siteData.multilingualContent[key]?.[language] || '';
+    return siteData?.multilingualContent[key]?.[language as keyof typeof siteData.multilingualContent[typeof key]] || '';
   };
 
   const login = (username: string, password: string): boolean => {
@@ -649,6 +334,26 @@ export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     setIsAdmin(false);
   };
 
+  // Show loading state while data is being loaded
+  if (isLoading || !siteData) {
+    return (
+      <AdminContext.Provider value={{
+        siteData: {} as SiteData,
+        updateSiteData: () => {},
+        isAdmin: false,
+        isLoggedIn: false,
+        setIsAdmin: () => {},
+        login: () => false,
+        logout: () => {},
+        updateMultilingualContent: () => {},
+        getMultilingualContent: () => '',
+        isLoading: true
+      }}>
+        {children}
+      </AdminContext.Provider>
+    );
+  }
+
   return (
     <AdminContext.Provider value={{ 
       siteData, 
@@ -659,7 +364,8 @@ export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       login, 
       logout,
       updateMultilingualContent,
-      getMultilingualContent
+      getMultilingualContent,
+      isLoading
     }}>
       {children}
     </AdminContext.Provider>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Shield, AlertTriangle, Users, Clock, Camera, Heart, CheckCircle, XCircle } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAdmin } from '../contexts/AdminContext';
@@ -107,8 +106,8 @@ const Regulations = () => {
   ];
 
   // Get regulation texts from admin context with fallback to defaults
-  const getRegulationText = (key: string) => {
-    return siteData.regulationTexts?.[key]?.[language] || '';
+  const getRegulationText = (key: keyof typeof siteData.regulationTexts) => {
+    return siteData.regulationTexts?.[key]?.[language as keyof typeof siteData.regulationTexts[typeof key]] || '';
   };
 
   return (
@@ -136,7 +135,7 @@ const Regulations = () => {
 
         {/* Regulations Grid */}
         <div className="grid lg:grid-cols-2 gap-8 mb-12">
-          {regulations.map((section, index) => {
+          {regulations.map((section) => {
             const IconComponent = iconMap[section.icon as keyof typeof iconMap] || Shield;
             
             return (
