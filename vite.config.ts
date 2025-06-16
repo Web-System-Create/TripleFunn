@@ -42,6 +42,13 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 80,
     cors: true,
+    allowedHosts: [
+      'localhost',
+      '127.0.0.1',
+      'triplefunn.ro',
+      'www.triplefunn.ro',
+      '*.triplefunn.ro'
+    ],
     headers: {
       'Cache-Control': 'public, max-age=31536000'
     }
