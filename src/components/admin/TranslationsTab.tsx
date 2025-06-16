@@ -16,7 +16,7 @@ const TranslationsTab: React.FC = () => {
 
   const checkApiStatus = async () => {
     try {
-      const API_BASE_URL = `http://${window.location.hostname}:3001/api`;
+      const API_BASE_URL = `${window.location.protocol}//${window.location.hostname}/api`;
 
       const response = await fetch(`${API_BASE_URL}/health`);
       if (response.ok) {
