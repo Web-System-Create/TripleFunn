@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { defaultSiteData } from '../data/defaultSiteData';
 
 interface SiteData {
   logo: string;
@@ -150,7 +151,7 @@ const STORAGE_KEY = 'triple-fun-site-data';
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
 
 export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [siteData, setSiteData] = useState<SiteData | null>(null);
+  const [siteData, setSiteData] = useState<SiteData>(defaultSiteData as SiteData);
   const [isLoading, setIsLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -160,131 +161,44 @@ export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     return false;
   });
 
-  // Load default site data from JSON file
+  // Load data from localStorage or use defaults
   useEffect(() => {
-    const loadDefaultSiteData = async () => {
+    const loadSiteData = () => {
       setIsLoading(true);
       try {
-        // Try to load from localStorage first
         if (typeof window !== 'undefined') {
           const stored = localStorage.getItem(STORAGE_KEY);
           if (stored) {
             const parsedData = JSON.parse(stored);
-            setSiteData(parsedData);
-            setIsLoading(false);
-            return;
+            // Merge with defaults to ensure all properties exist
+            setSiteData({ ...defaultSiteData, ...parsedData } as SiteData);
+          } else {
+            setSiteData(defaultSiteData as SiteData);
           }
-        }
-
-        // If no localStorage data, load from JSON file
-        const response = await fetch('/data/defaultSiteData.json');
-        if (response.ok) {
-          const defaultData = await response.json();
-          setSiteData(defaultData);
         } else {
-          console.error('Failed to load default site data');
-          // Fallback to minimal data structure
-          setSiteData({
-            logo: 'TF',
-            siteName: 'Triple Fun',
-            contact: {
-              phone: '0748 55 99 79',
-              whatsapp: '40748559979',
-              email: 'contact@triplefun.ro',
-              address: 'Strada Jocului Nr. 15, București'
-            },
-            whatsappMessages: {
-              booking: {
-                ro: '🎉 Salut! Vreau să rezerv o petrecere la Triple Fun!',
-                en: '🎉 Hello! I want to book a party at Triple Fun!',
-                hu: '🎉 Szia! Szeretnék bulit foglalni a Triple Fun-ban!'
-              },
-              contact: {
-                ro: '📞 Salut! Am o întrebare despre Triple Fun.',
-                en: '📞 Hello! I have a question about Triple Fun.',
-                hu: '📞 Szia! Kérdésem van a Triple Fun-nal kapcsolatban.'
-              }
-            },
-            schedule: {},
-            hero: { title: '', subtitle: '' },
-            services: [],
-            menu: {},
-            pricing: [],
-            offers: [],
-            gallery: [],
-            fullWidthGallery: [],
-            regulationTexts: {
-              warningTitle: { ro: '', en: '', hu: '' },
-              warningText: { ro: '', en: '', hu: '' },
-              refusalTitle: { ro: '', en: '', hu: '' },
-              refusalText: { ro: '', en: '', hu: '' },
-              acceptanceText: { ro: '', en: '', hu: '' },
-              thankYouTitle: { ro: '', en: '', hu: '' },
-              thankYouText: { ro: '', en: '', hu: '' }
-            },
-            multilingualContent: {}
-          });
+          setSiteData(defaultSiteData as SiteData);
         }
       } catch (error) {
-        console.error('Error loading default site data:', error);
-        setSiteData({
-          logo: 'TF',
-          siteName: 'Triple Fun',
-          contact: {
-            phone: '0748 55 99 79',
-            whatsapp: '40748559979',
-            email: 'contact@triplefun.ro',
-            address: 'Strada Jocului Nr. 15, București'
-          },
-          whatsappMessages: {
-            booking: {
-              ro: '🎉 Salut! Vreau să rezerv o petrecere la Triple Fun!',
-              en: '🎉 Hello! I want to book a party at Triple Fun!',
-              hu: '🎉 Szia! Szeretnék bulit foglalni a Triple Fun-ban!'
-            },
-            contact: {
-              ro: '📞 Salut! Am o întrebare despre Triple Fun.',
-              en: '📞 Hello! I have a question about Triple Fun.',
-              hu: '📞 Szia! Kérdésem van a Triple Fun-nal kapcsolatban.'
-            }
-          },
-          schedule: {},
-          hero: { title: '', subtitle: '' },
-          services: [],
-          menu: {},
-          pricing: [],
-          offers: [],
-          gallery: [],
-          fullWidthGallery: [],
-          regulationTexts: {
-            warningTitle: { ro: '', en: '', hu: '' },
-            warningText: { ro: '', en: '', hu: '' },
-            refusalTitle: { ro: '', en: '', hu: '' },
-            refusalText: { ro: '', en: '', hu: '' },
-            acceptanceText: { ro: '', en: '', hu: '' },
-            thankYouTitle: { ro: '', en: '', hu: '' },
-            thankYouText: { ro: '', en: '', hu: '' }
-          },
-          multilingualContent: {}
-        });
+        console.error('Error loading site data:', error);
+        setSiteData(defaultSiteData as SiteData);
       } finally {
         setIsLoading(false);
       }
     };
 
-    loadDefaultSiteData();
+    loadSiteData();
   }, []);
 
   // Save to localStorage when siteData changes
   useEffect(() => {
-    if (siteData && typeof window !== 'undefined') {
+    if (siteData && typeof window !== 'undefined' && !isLoading) {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(siteData));
       } catch (error) {
         console.error('Error saving data to localStorage:', error);
       }
     }
-  }, [siteData]);
+  }, [siteData, isLoading]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -293,27 +207,23 @@ export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   }, [isLoggedIn]);
 
   const updateSiteData = (data: Partial<SiteData>) => {
-    if (siteData) {
-      setSiteData(prev => {
-        const newData = { ...prev!, ...data };
-        return newData;
-      });
-    }
+    setSiteData(prev => {
+      const newData = { ...prev, ...data };
+      return newData;
+    });
   };
 
   const updateMultilingualContent = (key: string, language: string, value: string) => {
-    if (siteData) {
-      setSiteData(prev => ({
-        ...prev!,
-        multilingualContent: {
-          ...prev!.multilingualContent,
-          [key]: {
-            ...prev!.multilingualContent[key],
-            [language]: value
-          }
+    setSiteData(prev => ({
+      ...prev,
+      multilingualContent: {
+        ...prev.multilingualContent,
+        [key]: {
+          ...prev.multilingualContent[key],
+          [language]: value
         }
-      }));
-    }
+      }
+    }));
   };
 
   const getMultilingualContent = (key: string, language: string): string => {
@@ -333,26 +243,6 @@ export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     setIsLoggedIn(false);
     setIsAdmin(false);
   };
-
-  // Show loading state while data is being loaded
-  if (isLoading || !siteData) {
-    return (
-      <AdminContext.Provider value={{
-        siteData: {} as SiteData,
-        updateSiteData: () => {},
-        isAdmin: false,
-        isLoggedIn: false,
-        setIsAdmin: () => {},
-        login: () => false,
-        logout: () => {},
-        updateMultilingualContent: () => {},
-        getMultilingualContent: () => '',
-        isLoading: true
-      }}>
-        {children}
-      </AdminContext.Provider>
-    );
-  }
 
   return (
     <AdminContext.Provider value={{ 
