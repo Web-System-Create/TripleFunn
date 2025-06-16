@@ -17,7 +17,7 @@ interface UseI18nReturn {
 }
 
 const STORAGE_KEY = 'triple-fun-language';
-const API_BASE_URL = `${window.location.protocol}//${window.location.hostname}:3001/api`;
+const API_BASE_URL = `${window.location.protocol}//${window.location.hostname}/api`;
 export const useI18n = (): UseI18nReturn => {
   const [language, setLanguageState] = useState<Language>(() => {
     if (typeof window !== 'undefined') {
