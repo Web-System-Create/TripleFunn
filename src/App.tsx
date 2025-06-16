@@ -14,7 +14,7 @@ import { useLanguage } from './contexts/LanguageContext';
 
 function App() {
   const { isLoading: adminLoading, siteData } = useAdmin();
-  const { isLoading: i18nLoading, translations, language } = useLanguage();
+  const { isLoading: i18nLoading } = useLanguage();
 
   // Show loading screen while data is being loaded
   if (adminLoading || i18nLoading) {
@@ -41,8 +41,8 @@ function App() {
             <div>Pricing: {siteData?.pricing ? '✅' : '❌'}</div>
             <div>Contact: {siteData?.contact ? '✅' : '❌'}</div>
           </div>
-          <button 
-            onClick={() => window.location.reload()} 
+          <button
+            onClick={() => window.location.reload()}
             className="mt-4 bg-white text-red-500 px-6 py-2 rounded-full font-semibold hover:bg-gray-100"
           >
             Reîncarcă Pagina
@@ -62,8 +62,8 @@ function App() {
           <div className="mt-4 text-sm opacity-75">
             <div>Verifică că fișierele /public/i18n/ro.json, en.json, hu.json există</div>
           </div>
-          <button 
-            onClick={() => window.location.reload()} 
+          <button
+            onClick={() => window.location.reload()}
             className="mt-4 bg-white text-orange-500 px-6 py-2 rounded-full font-semibold hover:bg-gray-100"
           >
             Reîncarcă Pagina
