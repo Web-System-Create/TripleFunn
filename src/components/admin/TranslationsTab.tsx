@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Globe, Download, Upload, Info, Save, RefreshCw, AlertCircle, CheckCircle } from 'lucide-react';
+import { Download, Upload, Info, Save, RefreshCw, AlertCircle, CheckCircle } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 const TranslationsTab: React.FC = () => {
-  const { updateTranslation } = useLanguage();
+  const { translations, updateTranslation, saveTranslations } = useLanguage();
   const [translationEdits, setTranslationEdits] = useState<{[key: string]: {[lang: string]: string}}>({});
   const [isSaving, setIsSaving] = useState(false);
   const [lastSaved, setLastSaved] = useState<string | null>(null);
@@ -30,7 +30,7 @@ const TranslationsTab: React.FC = () => {
   // Common translation keys for editing
   const commonTranslationKeys = [
     'nav.services',
-    'nav.menu',
+    'nav.menu', 
     'nav.pricing',
     'nav.offers',
     'nav.contact',
@@ -72,11 +72,11 @@ const TranslationsTab: React.FC = () => {
     if (translationEdits[key] && translationEdits[key][lang] !== undefined) {
       return translationEdits[key][lang];
     }
-
+    
     const keys = key.split('.');
-    let value = translations[lang as keyof typeof translations];
+    let value: any = translations[lang as keyof typeof translations];
     for (const k of keys) {
-      value = value?.[k];
+      value = value?.[k as keyof typeof value];
     }
     return typeof value === 'string' ? value : '';
   };
@@ -89,7 +89,7 @@ const TranslationsTab: React.FC = () => {
         [lang]: value
       }
     }));
-
+    
     updateTranslation(key, lang as any, value);
   };
 
@@ -117,9 +117,9 @@ const TranslationsTab: React.FC = () => {
   const exportTranslations = () => {
     const dataStr = JSON.stringify(translations, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-
+    
     const exportFileDefaultName = 'triple-fun-translations.json';
-
+    
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
     linkElement.setAttribute('download', exportFileDefaultName);

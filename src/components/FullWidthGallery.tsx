@@ -60,7 +60,7 @@ const FullWidthGallery = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="text-center">
           <h2 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
-            Descoperă Lumea TripleFunn 🌟
+            Descoperă Lumea PlayFun 🌟
           </h2>
           <p className="text-2xl text-gray-700 max-w-4xl mx-auto font-medium">
             O privire în universul nostru magic plin de aventuri, zâmbete și momente de neuitat
@@ -75,7 +75,7 @@ const FullWidthGallery = () => {
             {row.map((image, imageIndex) => {
               const globalIndex = rowIndex * 3 + imageIndex;
               return (
-                <div
+                <div 
                   key={image.id}
                   className="relative flex-1 group overflow-hidden cursor-pointer"
                   onClick={() => openFullscreen(globalIndex)}
@@ -130,7 +130,7 @@ const FullWidthGallery = () => {
 
       {/* Fullscreen Gallery Modal */}
       {selectedImageIndex !== null && (
-        <div
+        <div 
           className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
           onKeyDown={handleKeyDown}
           tabIndex={0}
@@ -170,7 +170,7 @@ const FullWidthGallery = () => {
               alt={displayedImages[selectedImageIndex].title}
               className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
             />
-
+            
             {/* Image Info */}
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white rounded-b-lg">
               <h3 className="text-2xl font-bold mb-2">{displayedImages[selectedImageIndex].title}</h3>
@@ -215,7 +215,7 @@ const FullWidthGallery = () => {
           <div className="bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl p-8 text-white">
             <h3 className="text-3xl font-bold mb-4 flex items-center justify-center">
               <Sparkles className="h-8 w-8 mr-3 text-blue-200" />
-              Vino să trăiești magia!
+              Vino să trăiești magia! 
             </h3>
             <p className="text-xl mb-8 opacity-90">
               Fiecare imagine spune o poveste de bucurie și aventură

@@ -288,7 +288,7 @@ export const useI18n = (): UseI18nReturn => {
     const result = typeof value === 'string' ? value : key;
     
     // Debug log for missing translations (only in development)
-    if (result === key && key !== 'language' && process.env.NODE_ENV === 'development') {
+    if (result === key && key !== 'language' && typeof window !== 'undefined' && window.location.hostname === 'localhost') {
       console.warn(`🔍 Missing translation for key: ${key} in language: ${language}`);
     }
     

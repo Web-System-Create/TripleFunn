@@ -6,6 +6,8 @@ interface LanguageContextType {
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
   updateTranslation: (key: string, language: Language, value: string) => void;
+  saveTranslations: () => Promise<boolean>;
+  translations: Record<Language, any>;
   isLoading: boolean;
 }
 
