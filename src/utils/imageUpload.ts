@@ -1,5 +1,5 @@
 /**
- * Updated Image Upload Utility with Real Server Integration
+ * Updated Image Upload Utility with Combined Server Integration
  * Handles image uploads with validation, unique naming, and error handling
  */
 
@@ -27,8 +27,9 @@ const DEFAULT_OPTIONS: Required<UploadOptions> = {
   useRealServer: true
 };
 
-// API endpoints
-const UPLOAD_API_BASE = 'http://localhost:3002/api/upload';
+// Updated API endpoints - now using the combined server on port 3001
+const UPLOAD_API_BASE = `${window.location.protocol}//${window.location.hostname}/upload`;
+const UPLOAD_API_BASE_LOCAL = 'http://localhost:3001/api/upload';
 
 /**
  * Validates an image file against size and type constraints
@@ -67,16 +68,16 @@ export function generateUniqueFilename(originalName: string): string {
 
   // Clean the original name (remove special characters, spaces)
   const cleanName = nameWithoutExt
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
 
   return `${cleanName}-${timestamp}-${randomString}.${extension}`;
 }
 
 /**
- * Uploads an image file using the real upload server
+ * Uploads an image file using the combined server
  */
 export async function uploadImage(file: File, options: UploadOptions = {}): Promise<UploadResult> {
   const opts = { ...DEFAULT_OPTIONS, ...options };
@@ -92,11 +93,11 @@ export async function uploadImage(file: File, options: UploadOptions = {}): Prom
     }
 
     if (opts.useRealServer) {
-      // Use real upload server
-      return await uploadToRealServer(file);
+      // Use combined server
+      return await uploadToCombinedServer(file);
     } else {
       // Use placeholder/simulation
-      return await simulateImageUpload(file);
+      return await simulateImageUpload(file, opts);
     }
 
   } catch (error) {
@@ -109,13 +110,15 @@ export async function uploadImage(file: File, options: UploadOptions = {}): Prom
 }
 
 /**
- * Uploads to the real upload server
+ * Uploads to the combined server (tries production first, then local)
  */
-async function uploadToRealServer(file: File): Promise<UploadResult> {
-  try {
-    const formData = new FormData();
-    formData.append('image', file);
+async function uploadToCombinedServer(file: File): Promise<UploadResult> {
+  const formData = new FormData();
+  formData.append('image', file);
 
+  // Try production server first
+  try {
+    console.log('🌐 Trying production server...');
     const response = await fetch(`${UPLOAD_API_BASE}/single`, {
       method: 'POST',
       body: formData
@@ -124,6 +127,30 @@ async function uploadToRealServer(file: File): Promise<UploadResult> {
     const result = await response.json();
 
     if (result.success) {
+      console.log('✅ Upload successful via production server');
+      return {
+        success: true,
+        url: result.url,
+        filename: result.filename,
+        size: result.size
+      };
+    }
+  } catch (error) {
+    console.log('⚠️ Production server not available, trying local...');
+  }
+
+  // Try local server as fallback
+  try {
+    console.log('🏠 Trying local server...');
+    const response = await fetch(`${UPLOAD_API_BASE_LOCAL}/single`, {
+      method: 'POST',
+      body: formData
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      console.log('✅ Upload successful via local server');
       return {
         success: true,
         url: result.url,
@@ -138,18 +165,17 @@ async function uploadToRealServer(file: File): Promise<UploadResult> {
     }
 
   } catch (error) {
-    console.error('Real server upload error:', error);
+    console.error('❌ Both servers failed, using placeholder:', error);
 
-    // Fallback to placeholder if server is not available
-    console.log('🔄 Server not available, using placeholder...');
-    return await simulateImageUpload(file);
+    // Fallback to placeholder if both servers are not available
+    return await simulateImageUpload(file, DEFAULT_OPTIONS);
   }
 }
 
 /**
  * Simulates image upload process (fallback)
  */
-async function simulateImageUpload(file: File): Promise<UploadResult> {
+async function simulateImageUpload(file: File, options: UploadOptions): Promise<UploadResult> {
   // Simulate upload delay
   await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
 
@@ -177,28 +203,38 @@ async function simulateImageUpload(file: File): Promise<UploadResult> {
  * Uploads multiple images with progress tracking
  */
 export async function uploadMultipleImages(
-  files: FileList | File[],
-  options: UploadOptions = {},
-  onProgress?: (progress: number, currentFile: string) => void
+    files: FileList | File[],
+    options: UploadOptions = {},
+    onProgress?: (progress: number, currentFile: string) => void
 ): Promise<UploadResult[]> {
 
   const opts = { ...DEFAULT_OPTIONS, ...options };
   const fileArray = Array.from(files);
 
   if (opts.useRealServer) {
-    // Try bulk upload to real server first
+    // Try bulk upload to combined server first
     try {
       const formData = new FormData();
-      fileArray.forEach((file) => {
+      fileArray.forEach((file, index) => {
         formData.append('images', file);
       });
 
       onProgress?.(50, 'Încărcare pe server...');
 
-      const response = await fetch(`${UPLOAD_API_BASE}/multiple`, {
-        method: 'POST',
-        body: formData
-      });
+      // Try production first, then local
+      let response;
+      try {
+        response = await fetch(`${UPLOAD_API_BASE}/multiple`, {
+          method: 'POST',
+          body: formData
+        });
+      } catch (error) {
+        console.log('⚠️ Production server not available, trying local...');
+        response = await fetch(`${UPLOAD_API_BASE_LOCAL}/multiple`, {
+          method: 'POST',
+          body: formData
+        });
+      }
 
       const result = await response.json();
       onProgress?.(100, 'Finalizat');
@@ -249,9 +285,15 @@ export async function uploadMultipleImages(
  */
 export async function listUploadedFiles(): Promise<{ success: boolean; files?: any[]; error?: string }> {
   try {
-    const response = await fetch(`${UPLOAD_API_BASE}/list`);
-    const result = await response.json();
+    // Try production first, then local
+    let response;
+    try {
+      response = await fetch(`${UPLOAD_API_BASE}/list`);
+    } catch (error) {
+      response = await fetch(`${UPLOAD_API_BASE_LOCAL}/list`);
+    }
 
+    const result = await response.json();
     return result;
   } catch (error) {
     console.error('List files error:', error);
@@ -267,9 +309,17 @@ export async function listUploadedFiles(): Promise<{ success: boolean; files?: a
  */
 export async function deleteUploadedFile(filename: string): Promise<{ success: boolean; error?: string }> {
   try {
-    const response = await fetch(`${UPLOAD_API_BASE}/${filename}`, {
-      method: 'DELETE'
-    });
+    // Try production first, then local
+    let response;
+    try {
+      response = await fetch(`${UPLOAD_API_BASE}/${filename}`, {
+        method: 'DELETE'
+      });
+    } catch (error) {
+      response = await fetch(`${UPLOAD_API_BASE_LOCAL}/${filename}`, {
+        method: 'DELETE'
+      });
+    }
 
     const result = await response.json();
     return result;
@@ -287,8 +337,14 @@ export async function deleteUploadedFile(filename: string): Promise<{ success: b
  */
 export async function checkUploadServerStatus(): Promise<boolean> {
   try {
-    const response = await fetch(`${UPLOAD_API_BASE}/health`);
-    return response.ok;
+    // Try production first, then local
+    try {
+      const response = await fetch(`${UPLOAD_API_BASE}/health`);
+      return response.ok;
+    } catch (error) {
+      const response = await fetch(`${UPLOAD_API_BASE_LOCAL}/health`);
+      return response.ok;
+    }
   } catch (error) {
     return false;
   }
