@@ -1,15 +1,19 @@
 {
-  "name": "triple-fun-api-server",
+  "name": "triple-fun-servers",
   "version": "1.0.0",
-  "description": "API server for Triple Fun translations and site data",
+  "description": "API servers for Triple Fun - translations, site data, and file uploads",
   "main": "translationServer.js",
   "scripts": {
     "start": "node translationServer.js",
-    "dev": "nodemon translationServer.js"
+    "start:upload": "node uploadServer.js",
+    "start:all": "concurrently \"npm run start\" \"npm run start:upload\"",
+    "dev": "concurrently \"nodemon translationServer.js\" \"nodemon uploadServer.js\""
   },
   "dependencies": {
     "express": "^4.18.2",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "multer": "^1.4.5-lts.1",
+    "concurrently": "^8.2.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

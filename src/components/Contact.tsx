@@ -69,7 +69,7 @@ Trimis de pe site-ul Triple Fun`;
       });
     } catch (error) {
       console.error('Error opening WhatsApp:', error);
-      alert('A apărut o eroare. Vă rugăm să sunați direct la 0748 55 99 79.');
+      alert('A apărut o eroare. Vă rugăm să sunați direct la 0755286670.');
     }
   };
 
@@ -107,7 +107,7 @@ Trimis de pe site-ul Triple Fun`;
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800">Telefon</h4>
-                    <p className="text-gray-600">{siteData?.contact?.phone || '0748 55 99 79'}</p>
+                    <p className="text-gray-600">{siteData?.contact?.phone || '0755286670'}</p>
                   </div>
                 </div>
 

@@ -5,6 +5,11 @@ import ContactTab from './admin/ContactTab';
 import TranslationsTab from './admin/TranslationsTab';
 import ServicesTab from './admin/ServicesTab';
 import PricingTab from './admin/PricingTab';
+import OffersTab from './admin/OffersTab';
+import GalleryTab from './admin/GalleryTab';
+import FullWidthGalleryTab from './admin/FullWidthGalleryTab';
+import RegulationsTab from './admin/RegulationsTab';
+import ImageUploadTab from './admin/ImageUploadTab';
 
 interface AdminPanelProps {
   isOpen: boolean;
@@ -181,6 +186,150 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
     }));
   };
 
+  // Offers management functions
+  const addOffer = () => {
+    const newOffer = {
+      id: Date.now().toString(),
+      title: 'Ofertă Nouă',
+      description: 'Descrierea ofertei',
+      validUntil: 'Valabil până...',
+      color: 'bg-blue-500'
+    };
+    setFormData(prev => ({
+      ...prev,
+      offers: [...prev.offers, newOffer]
+    }));
+  };
+
+  const updateOffer = (index: number, field: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      offers: prev.offers.map((offer, i) => 
+        i === index ? { ...offer, [field]: value } : offer
+      )
+    }));
+  };
+
+  const removeOffer = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      offers: prev.offers.filter((_, i) => i !== index)
+    }));
+  };
+
+  // Gallery management functions
+  const addGalleryImage = (galleryType: 'gallery' | 'fullWidthGallery') => {
+    const newImage = {
+      id: Date.now().toString(),
+      url: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Imagine Nouă',
+      ...(galleryType === 'gallery' ? { category: 'playground' } : { description: 'Descrierea imaginii' })
+    };
+    setFormData(prev => ({
+      ...prev,
+      [galleryType]: [...prev[galleryType], newImage]
+    }));
+  };
+
+  const updateGalleryImage = (galleryType: 'gallery' | 'fullWidthGallery', index: number, field: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [galleryType]: prev[galleryType].map((image, i) => 
+        i === index ? { ...image, [field]: value } : image
+      )
+    }));
+  };
+
+  const removeGalleryImage = (galleryType: 'gallery' | 'fullWidthGallery', index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      [galleryType]: prev[galleryType].filter((_, i) => i !== index)
+    }));
+  };
+
+  // Regulations management functions
+  const addRegulation = () => {
+    const newRegulation = {
+      id: Date.now().toString(),
+      icon: 'Shield',
+      title: 'Regulă Nouă',
+      items: ['Punct 1', 'Punct 2'],
+      color: 'bg-blue-500',
+      bgColor: 'bg-blue-50'
+    };
+    setFormData(prev => ({
+      ...prev,
+      regulations: [...prev.regulations, newRegulation]
+    }));
+  };
+
+  const updateRegulation = (index: number, field: string, value: any) => {
+    setFormData(prev => ({
+      ...prev,
+      regulations: prev.regulations.map((regulation, i) => 
+        i === index ? { ...regulation, [field]: value } : regulation
+      )
+    }));
+  };
+
+  const removeRegulation = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      regulations: prev.regulations.filter((_, i) => i !== index)
+    }));
+  };
+
+  const addRegulationItem = (regulationIndex: number) => {
+    setFormData(prev => ({
+      ...prev,
+      regulations: prev.regulations.map((regulation, i) => 
+        i === regulationIndex ? { 
+          ...regulation, 
+          items: [...regulation.items, 'Punct nou'] 
+        } : regulation
+      )
+    }));
+  };
+
+  const updateRegulationItem = (regulationIndex: number, itemIndex: number, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      regulations: prev.regulations.map((regulation, i) => 
+        i === regulationIndex ? { 
+          ...regulation, 
+          items: regulation.items.map((item: string, j: number) => 
+            j === itemIndex ? value : item
+          ) 
+        } : regulation
+      )
+    }));
+  };
+
+  const removeRegulationItem = (regulationIndex: number, itemIndex: number) => {
+    setFormData(prev => ({
+      ...prev,
+      regulations: prev.regulations.map((regulation, i) => 
+        i === regulationIndex ? { 
+          ...regulation, 
+          items: regulation.items.filter((_: any, j: number) => j !== itemIndex) 
+        } : regulation
+      )
+    }));
+  };
+
+  const updateRegulationText = (textKey: string, language: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      regulationTexts: {
+        ...prev.regulationTexts,
+        [textKey]: {
+          ...prev.regulationTexts[textKey as keyof typeof prev.regulationTexts],
+          [language]: value
+        }
+      }
+    }));
+  };
+
   const tabs = [
     { id: 'contact', label: 'Contact', icon: '📞' },
     { id: 'translations', label: 'Traduceri', icon: '🌐' },
@@ -188,7 +337,9 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
     { id: 'pricing', label: 'Prețuri', icon: '💰' },
     { id: 'offers', label: 'Oferte', icon: '🎁' },
     { id: 'gallery', label: 'Galerie', icon: '📸' },
-    { id: 'regulations', label: 'Regulament', icon: '📋' }
+    { id: 'fullWidthGallery', label: 'Galerie Full', icon: '🖼️' },
+    { id: 'regulations', label: 'Regulament', icon: '📋' },
+    { id: 'imageUpload', label: 'Încărcare Imagini', icon: '⬆️' }
   ];
 
   return (
@@ -203,7 +354,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
               </div>
               <div>
                 <h2 className="text-xl font-bold">Panou Administrare</h2>
-                <p className="text-white/80 text-sm">Gestionează conținutul site-ului și traducerile</p>
+                <p className="text-white/80 text-sm">Gestionează conținutul site-ului, traducerile și imaginile</p>
               </div>
             </div>
             <div className="flex items-center space-x-3">
@@ -276,24 +427,48 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
             />
           )}
 
-          {/* Other tabs can be implemented similarly */}
           {activeTab === 'offers' && (
-            <div className="text-center py-8">
-              <p className="text-gray-500">Tab Oferte - În dezvoltare</p>
-            </div>
+            <OffersTab 
+              offers={formData.offers}
+              updateOffer={updateOffer}
+              addOffer={addOffer}
+              removeOffer={removeOffer}
+            />
           )}
 
           {activeTab === 'gallery' && (
-            <div className="text-center py-8">
-              <p className="text-gray-500">Tab Galerie - În dezvoltare</p>
-            </div>
+            <GalleryTab 
+              gallery={formData.gallery}
+              updateGalleryImage={(index, field, value) => updateGalleryImage('gallery', index, field, value)}
+              addGalleryImage={() => addGalleryImage('gallery')}
+              removeGalleryImage={(index) => removeGalleryImage('gallery', index)}
+            />
+          )}
+
+          {activeTab === 'fullWidthGallery' && (
+            <FullWidthGalleryTab 
+              fullWidthGallery={formData.fullWidthGallery}
+              updateGalleryImage={(index, field, value) => updateGalleryImage('fullWidthGallery', index, field, value)}
+              addGalleryImage={() => addGalleryImage('fullWidthGallery')}
+              removeGalleryImage={(index) => removeGalleryImage('fullWidthGallery', index)}
+            />
           )}
 
           {activeTab === 'regulations' && (
-            <div className="text-center py-8">
-              <p className="text-gray-500">Tab Regulament - În dezvoltare</p>
-            </div>
+            <RegulationsTab 
+              regulations={formData.regulations}
+              regulationTexts={formData.regulationTexts}
+              updateRegulation={updateRegulation}
+              addRegulation={addRegulation}
+              removeRegulation={removeRegulation}
+              addRegulationItem={addRegulationItem}
+              updateRegulationItem={updateRegulationItem}
+              removeRegulationItem={removeRegulationItem}
+              updateRegulationText={updateRegulationText}
+            />
           )}
+
+          {activeTab === 'imageUpload' && <ImageUploadTab />}
         </div>
       </div>
     </div>

@@ -16,9 +16,7 @@ const TranslationsTab: React.FC = () => {
 
   const checkApiStatus = async () => {
     try {
-      const API_BASE_URL = `${window.location.protocol}//${window.location.hostname}/api`;
-
-      const response = await fetch(`${API_BASE_URL}/health`);
+      const response = await fetch('https://triplefunn.ro/api/health');
       if (response.ok) {
         setApiStatus('available');
       } else {
@@ -104,12 +102,12 @@ const TranslationsTab: React.FC = () => {
         alert('✅ Traducerile au fost salvate cu succes în fișierele JSON!\n\n🌐 TOȚI clienții vor vedea noile traduceri la următorul refresh al paginii.');
         setApiStatus('available');
       } else {
-        alert('❌ Eroare la salvarea traducerilor.\n\n🔧 Verifică că API server-ul rulează:\ncd server && npm start');
+        alert('❌ Eroare la salvarea traducerilor.\n\n🔧 Verifică că API server-ul rulează pe:\nhttps://triplefunn.ro/api');
         setApiStatus('unavailable');
       }
     } catch (error) {
       console.error('Error saving translations:', error);
-      alert('❌ Eroare la salvarea traducerilor.\n\n🔧 Pentru a salva în fișierele JSON, pornește API server-ul:\ncd server && npm start');
+      alert('❌ Eroare la salvarea traducerilor.\n\n🔧 Pentru a salva în fișierele JSON, verifică că API server-ul rulează pe:\nhttps://triplefunn.ro/api');
       setApiStatus('unavailable');
     } finally {
       setIsSaving(false);
@@ -225,15 +223,15 @@ const TranslationsTab: React.FC = () => {
                 <>
                   <p><strong>🎯 Perfect!</strong> Traducerile se vor salva în fișierele JSON</p>
                   <p><strong>🌐 Pentru toți clienții:</strong> Modificările vor fi imediat disponibile</p>
-                  <p><strong>🔧 Server:</strong> http://localhost:3001 - Funcționează</p>
+                  <p><strong>🔧 Server:</strong> https://triplefunn.ro/api - Funcționează</p>
                 </>
               ) : (
                 <>
                   <p><strong>⚠️ Atenție:</strong> Traducerile se salvează doar local (pentru preview)</p>
-                  <p><strong>🔧 Pentru a salva în fișiere:</strong> Pornește API server-ul</p>
+                  <p><strong>🔧 Pentru a salva în fișiere:</strong> Verifică API server-ul</p>
                   <div className="mt-2 p-2 bg-red-100 rounded text-xs">
-                    <strong>Comandă:</strong><br/>
-                    <code>cd server && npm install && npm start</code>
+                    <strong>URL API:</strong><br/>
+                    <code>https://triplefunn.ro/api</code>
                   </div>
                 </>
               )}

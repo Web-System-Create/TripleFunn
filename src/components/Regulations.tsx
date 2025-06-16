@@ -84,7 +84,7 @@ const Regulations = () => {
       icon: 'Clock',
       title: "Rezervări și Plăți",
       items: [
-        "Cu 48h înainte de eveniment, comunicați numărul total de persoane participante la tel: 0748 55 99 79",
+        "Cu 48h înainte de eveniment, comunicați numărul total de persoane participante la tel: 0755286670",
         "Avansul nu se returnează",
         "În cazul daunelor materiale din neglijență, se va achita contravaloarea obiectelor deteriorate"
       ],

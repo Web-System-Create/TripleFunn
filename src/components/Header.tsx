@@ -92,7 +92,7 @@ const Header = () => {
     // Check if siteData and contact exist
     if (!siteData?.contact?.whatsapp) {
       console.warn('WhatsApp number not available in siteData:', siteData);
-      alert('Numărul WhatsApp nu este disponibil momentan. Vă rugăm să sunați la 0748 55 99 79');
+      alert('Numărul WhatsApp nu este disponibil momentan. Vă rugăm să sunați la 0755286670');
       return;
     }
 
@@ -123,7 +123,7 @@ const Header = () => {
       }
     } else {
       console.warn('Invalid WhatsApp number:', siteData.contact.whatsapp);
-      alert('Numărul WhatsApp nu este valid. Vă rugăm să sunați la 0748 55 99 79');
+      alert('Numărul WhatsApp nu este valid. Vă rugăm să sunați la 0755286670');
     }
   };
 
@@ -163,7 +163,7 @@ const Header = () => {
             <div className="hidden md:flex items-center space-x-4">
               <div className="flex items-center text-sm text-white bg-white bg-opacity-20 px-3 py-2 rounded-full backdrop-blur-sm">
                 <Phone className="h-4 w-4 mr-2" />
-                <span>{siteData?.contact?.phone || '0748 55 99 79'}</span>
+                <span>{siteData?.contact?.phone || '0755286670'}</span>
               </div>
               
               <div className="flex items-center space-x-2">
@@ -324,7 +324,7 @@ const Header = () => {
         <button
           onClick={makeCall}
           className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 group"
-          title={`Sună: ${siteData?.contact?.phone || '0748 55 99 79'}`}
+          title={`Sună: ${siteData?.contact?.phone || '0755286670'}`}
         >
           <Phone className="h-6 w-6 group-hover:animate-pulse" />
         </button>
