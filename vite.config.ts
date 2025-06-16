@@ -39,7 +39,7 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'https://localhost:3001',
+        target: '0.0.0.0:3001',
         changeOrigin: true,
         secure: false, // setează false dacă ai certificat self-signed
       },
