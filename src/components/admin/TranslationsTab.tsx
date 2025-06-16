@@ -16,7 +16,9 @@ const TranslationsTab: React.FC = () => {
 
   const checkApiStatus = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/health');
+      const API_BASE_URL = `${window.location.protocol}//${window.location.hostname}:3001/api`;
+
+      const response = await fetch(`${API_BASE_URL}/health`);
       if (response.ok) {
         setApiStatus('available');
       } else {
@@ -30,7 +32,7 @@ const TranslationsTab: React.FC = () => {
   // Common translation keys for editing
   const commonTranslationKeys = [
     'nav.services',
-    'nav.menu', 
+    'nav.menu',
     'nav.pricing',
     'nav.offers',
     'nav.contact',
@@ -72,7 +74,7 @@ const TranslationsTab: React.FC = () => {
     if (translationEdits[key] && translationEdits[key][lang] !== undefined) {
       return translationEdits[key][lang];
     }
-    
+
     const keys = key.split('.');
     let value: any = translations[lang as keyof typeof translations];
     for (const k of keys) {
@@ -89,7 +91,7 @@ const TranslationsTab: React.FC = () => {
         [lang]: value
       }
     }));
-    
+
     updateTranslation(key, lang as any, value);
   };
 
@@ -117,9 +119,9 @@ const TranslationsTab: React.FC = () => {
   const exportTranslations = () => {
     const dataStr = JSON.stringify(translations, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    
+
     const exportFileDefaultName = 'triple-fun-translations.json';
-    
+
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
     linkElement.setAttribute('download', exportFileDefaultName);
