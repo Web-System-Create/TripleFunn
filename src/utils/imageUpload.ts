@@ -64,14 +64,14 @@ export function generateUniqueFilename(originalName: string): string {
   const randomString = Math.random().toString(36).substring(2, 8);
   const extension = originalName.split('.').pop()?.toLowerCase() || '';
   const nameWithoutExt = originalName.split('.').slice(0, -1).join('.');
-  
+
   // Clean the original name (remove special characters, spaces)
   const cleanName = nameWithoutExt
     .toLowerCase()
     .replace(/[^a-z0-9]/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
-  
+
   return `${cleanName}-${timestamp}-${randomString}.${extension}`;
 }
 
@@ -96,7 +96,7 @@ export async function uploadImage(file: File, options: UploadOptions = {}): Prom
       return await uploadToRealServer(file);
     } else {
       // Use placeholder/simulation
-      return await simulateImageUpload(file, opts);
+      return await simulateImageUpload(file);
     }
 
   } catch (error) {
@@ -139,24 +139,24 @@ async function uploadToRealServer(file: File): Promise<UploadResult> {
 
   } catch (error) {
     console.error('Real server upload error:', error);
-    
+
     // Fallback to placeholder if server is not available
     console.log('🔄 Server not available, using placeholder...');
-    return await simulateImageUpload(file, DEFAULT_OPTIONS);
+    return await simulateImageUpload(file);
   }
 }
 
 /**
  * Simulates image upload process (fallback)
  */
-async function simulateImageUpload(file: File, options: UploadOptions): Promise<UploadResult> {
+async function simulateImageUpload(file: File): Promise<UploadResult> {
   // Simulate upload delay
   await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
 
   try {
     // Use a placeholder service
     const placeholderUrl = `https://picsum.photos/800/600?random=${Date.now()}`;
-    
+
     return {
       success: true,
       url: placeholderUrl,
@@ -177,11 +177,11 @@ async function simulateImageUpload(file: File, options: UploadOptions): Promise<
  * Uploads multiple images with progress tracking
  */
 export async function uploadMultipleImages(
-  files: FileList | File[], 
+  files: FileList | File[],
   options: UploadOptions = {},
   onProgress?: (progress: number, currentFile: string) => void
 ): Promise<UploadResult[]> {
-  
+
   const opts = { ...DEFAULT_OPTIONS, ...options };
   const fileArray = Array.from(files);
 
@@ -189,7 +189,7 @@ export async function uploadMultipleImages(
     // Try bulk upload to real server first
     try {
       const formData = new FormData();
-      fileArray.forEach((file, index) => {
+      fileArray.forEach((file) => {
         formData.append('images', file);
       });
 
@@ -218,29 +218,29 @@ export async function uploadMultipleImages(
 
   // Fallback to individual uploads
   const results: UploadResult[] = [];
-  
+
   for (let i = 0; i < fileArray.length; i++) {
     const file = fileArray[i];
-    
+
     // Update progress
     if (onProgress) {
       const progress = (i / fileArray.length) * 100;
       onProgress(progress, file.name);
     }
-    
+
     // Upload individual file
     const result = await uploadImage(file, options);
     results.push(result);
-    
+
     // Small delay between uploads
     await new Promise(resolve => setTimeout(resolve, 100));
   }
-  
+
   // Final progress update
   if (onProgress) {
     onProgress(100, 'Finalizat');
   }
-  
+
   return results;
 }
 
@@ -251,7 +251,7 @@ export async function listUploadedFiles(): Promise<{ success: boolean; files?: a
   try {
     const response = await fetch(`${UPLOAD_API_BASE}/list`);
     const result = await response.json();
-    
+
     return result;
   } catch (error) {
     console.error('List files error:', error);
@@ -270,7 +270,7 @@ export async function deleteUploadedFile(filename: string): Promise<{ success: b
     const response = await fetch(`${UPLOAD_API_BASE}/${filename}`, {
       method: 'DELETE'
     });
-    
+
     const result = await response.json();
     return result;
   } catch (error) {
@@ -299,11 +299,11 @@ export async function checkUploadServerStatus(): Promise<boolean> {
  */
 export function formatFileSize(bytes: number): string {
   if (bytes === 0) return '0 Bytes';
-  
+
   const k = 1024;
   const sizes = ['Bytes', 'KB', 'MB', 'GB'];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  
+
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
 

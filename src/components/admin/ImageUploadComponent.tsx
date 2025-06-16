@@ -40,7 +40,7 @@ const ImageUploadComponent: React.FC<ImageUploadComponentProps> = ({
 
   const handleFiles = async (files: FileList | File[]) => {
     const fileArray = Array.from(files);
-    
+
     // Limit number of files
     if (multiple && fileArray.length > maxFiles) {
       const error = `Poți încărca maximum ${maxFiles} imagini odată`;
@@ -50,7 +50,7 @@ const ImageUploadComponent: React.FC<ImageUploadComponentProps> = ({
 
     // Validate all files first
     const validationErrors: string[] = [];
-    fileArray.forEach((file, index) => {
+    fileArray.forEach((file) => {
       const validation = validateImageFile(file);
       if (!validation.valid) {
         validationErrors.push(`${file.name}: ${validation.error}`);
@@ -98,12 +98,12 @@ const ImageUploadComponent: React.FC<ImageUploadComponentProps> = ({
       } else {
         // Upload single file
         const result = await uploadImage(fileArray[0]);
-        
-        setUploadState(prev => ({ 
-          ...prev, 
-          results: [result], 
+
+        setUploadState(prev => ({
+          ...prev,
+          results: [result],
           isUploading: false,
-          progress: 100 
+          progress: 100
         }));
 
         if (result.success && result.url && result.filename) {
@@ -196,7 +196,7 @@ const ImageUploadComponent: React.FC<ImageUploadComponentProps> = ({
               <p className="text-sm text-gray-500">{uploadState.currentFile}</p>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
-              <div 
+              <div
                 className="bg-blue-500 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${uploadState.progress}%` }}
               />
