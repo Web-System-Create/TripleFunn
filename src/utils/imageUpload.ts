@@ -28,7 +28,7 @@ const DEFAULT_OPTIONS: Required<UploadOptions> = {
 };
 
 // Updated API endpoints - now using the combined server on port 3001
-const UPLOAD_API_BASE = `${window.location.protocol}//${window.location.hostname}/upload`;
+const UPLOAD_API_BASE = 'https://triplefunn.ro/api/upload';
 const UPLOAD_API_BASE_LOCAL = 'http://localhost:3001/api/upload';
 
 /**
@@ -97,7 +97,7 @@ export async function uploadImage(file: File, options: UploadOptions = {}): Prom
       return await uploadToCombinedServer(file);
     } else {
       // Use placeholder/simulation
-      return await simulateImageUpload(file, opts);
+      return await simulateImageUpload(file);
     }
 
   } catch (error) {
@@ -168,14 +168,14 @@ async function uploadToCombinedServer(file: File): Promise<UploadResult> {
     console.error('❌ Both servers failed, using placeholder:', error);
 
     // Fallback to placeholder if both servers are not available
-    return await simulateImageUpload(file, DEFAULT_OPTIONS);
+    return await simulateImageUpload(file);
   }
 }
 
 /**
  * Simulates image upload process (fallback)
  */
-async function simulateImageUpload(file: File, options: UploadOptions): Promise<UploadResult> {
+async function simulateImageUpload(file: File): Promise<UploadResult> {
   // Simulate upload delay
   await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
 
@@ -215,7 +215,7 @@ export async function uploadMultipleImages(
     // Try bulk upload to combined server first
     try {
       const formData = new FormData();
-      fileArray.forEach((file, index) => {
+      fileArray.forEach((file) => {
         formData.append('images', file);
       });
 
