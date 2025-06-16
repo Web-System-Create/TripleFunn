@@ -77,11 +77,11 @@ const Gallery = () => {
   ];
 
   const categories = [
-    { key: 'all', label: t('gallery.filter.all'), icon: Camera },
-    { key: 'playground', label: t('gallery.filter.playground'), icon: Camera },
-    { key: 'parties', label: t('gallery.filter.parties'), icon: Camera },
-    { key: 'food', label: t('gallery.filter.food'), icon: Camera },
-    { key: 'events', label: t('gallery.filter.events'), icon: Camera }
+    { key: 'all', label: t('gallery.filters.all'), icon: Camera },
+    { key: 'playground', label: t('gallery.filters.playground'), icon: Camera },
+    { key: 'parties', label: t('gallery.filters.parties'), icon: Camera },
+    { key: 'food', label: t('gallery.filters.food'), icon: Camera },
+    { key: 'events', label: t('gallery.filters.events'), icon: Camera }
   ];
 
   const filteredImages = activeFilter === 'all' 

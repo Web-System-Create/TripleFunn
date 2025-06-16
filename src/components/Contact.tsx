@@ -1,16 +1,19 @@
 import React from 'react';
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Contact = () => {
+  const { t } = useLanguage();
+
   return (
     <section id="contact" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">
-            Contactează-ne
+            {t('contact.title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Suntem aici pentru tine! Contactează-ne pentru rezervări sau pentru orice întrebare
+            {t('contact.subtitle')}
           </p>
         </div>
 
@@ -18,7 +21,7 @@ const Contact = () => {
           <div className="space-y-8">
             <div className="bg-white rounded-2xl p-6 shadow-lg">
               <h3 className="text-2xl font-bold text-gray-800 mb-6">Informații de Contact</h3>
-
+              
               <div className="space-y-6">
                 <div className="flex items-start">
                   <div className="bg-orange-100 p-3 rounded-full mr-4">
@@ -36,7 +39,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800">Telefon</h4>
-                    <p className="text-gray-600">0722 123 456<br />021 123 4567</p>
+                    <p className="text-gray-600">0748 55 99 79<br />021 123 4567</p>
                   </div>
                 </div>
 
@@ -46,7 +49,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800">Email</h4>
-                    <p className="text-gray-600">contact@triplefunn.ro<br />rezervari@playfun.ro</p>
+                    <p className="text-gray-600">contact@triplefun.ro<br />rezervari@triplefun.ro</p>
                   </div>
                 </div>
 
@@ -81,7 +84,7 @@ const Contact = () => {
 
           <div className="bg-white rounded-2xl p-6 shadow-lg">
             <h3 className="text-2xl font-bold text-gray-800 mb-6">Trimite-ne un Mesaj</h3>
-
+            
             <form className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
@@ -101,7 +104,7 @@ const Contact = () => {
                   <input
                     type="tel"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all"
-                    placeholder="0722 123 456"
+                    placeholder="0748 55 99 79"
                   />
                 </div>
               </div>

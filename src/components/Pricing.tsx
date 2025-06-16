@@ -86,19 +86,19 @@ const Pricing = () => {
             <h3 className="text-2xl font-bold text-gray-800 mb-4">{t('pricing.additional')}</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
               <div className="text-center">
-                <div className="font-semibold text-gray-800">{t('pricing.extra.animators')}</div>
+                <div className="font-semibold text-gray-800">{t('pricing.extras.animators')}</div>
                 <div className="text-purple-500">50 lei/oră</div>
               </div>
               <div className="text-center">
-                <div className="font-semibold text-gray-800">{t('pricing.extra.time')}</div>
+                <div className="font-semibold text-gray-800">{t('pricing.extras.time')}</div>
                 <div className="text-purple-500">30 lei/oră</div>
               </div>
               <div className="text-center">
-                <div className="font-semibold text-gray-800">{t('pricing.extra.decorations')}</div>
+                <div className="font-semibold text-gray-800">{t('pricing.extras.decorations')}</div>
                 <div className="text-purple-500">De la 25 lei</div>
               </div>
               <div className="text-center">
-                <div className="font-semibold text-gray-800">{t('pricing.extra.transport')}</div>
+                <div className="font-semibold text-gray-800">{t('pricing.extras.transport')}</div>
                 <div className="text-purple-500">20 lei</div>
               </div>
             </div>

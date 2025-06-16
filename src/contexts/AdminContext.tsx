@@ -54,14 +54,12 @@ interface SiteData {
     title: string;
     category: string;
   }>;
-  // New: Full-width gallery
   fullWidthGallery: Array<{
     id: string;
     url: string;
     title: string;
     description: string;
   }>;
-  // New: Regulations with multilingual support
   regulations?: Array<{
     id: string;
     icon: string;
@@ -70,7 +68,6 @@ interface SiteData {
     color: string;
     bgColor: string;
   }>;
-  // New: Editable regulation texts
   regulationTexts: {
     warningTitle: {
       ro: string;
@@ -108,7 +105,6 @@ interface SiteData {
       hu: string;
     };
   };
-  // New multilingual content
   multilingualContent: {
     [key: string]: {
       ro: string;
@@ -361,7 +357,6 @@ const defaultSiteData: SiteData = {
       category: 'food'
     }
   ],
-  // New: Full-width gallery data
   fullWidthGallery: [
     {
       id: '1',
@@ -400,7 +395,6 @@ const defaultSiteData: SiteData = {
       description: 'Zâmbete și bucurie pentru toți'
     }
   ],
-  // New: Default regulations data
   regulations: [
     {
       id: '1',
@@ -487,7 +481,6 @@ const defaultSiteData: SiteData = {
       bgColor: 'bg-pink-50'
     }
   ],
-  // New: Editable regulation texts with multilingual support
   regulationTexts: {
     warningTitle: {
       ro: '⚠️ ATENȚIE IMPORTANTĂ ⚠️',
@@ -526,7 +519,6 @@ const defaultSiteData: SiteData = {
     }
   },
   multilingualContent: {
-    // Hero section
     'hero.title.main': {
       ro: 'Cea mai',
       en: 'The most',
@@ -547,7 +539,6 @@ const defaultSiteData: SiteData = {
       en: 'The perfect place for children\'s parties, special events and family fun. We offer memorable experiences in a safe and friendly environment.',
       hu: 'A tökéletes hely gyerekbulikhoz, különleges eseményekhez és családi szórakozáshoz. Emlékezetes élményeket kínálunk biztonságos és barátságos környezetben.'
     },
-    // Services section
     'services.title': {
       ro: 'Serviciile Noastre',
       en: 'Our Services',
@@ -558,7 +549,6 @@ const defaultSiteData: SiteData = {
       en: 'We offer a complete range of services to make your and your child\'s experience special',
       hu: 'Teljes körű szolgáltatásokat kínálunk, hogy a te és gyermeked élménye különleges legyen'
     },
-    // Regulations section
     'regulations.title': {
       ro: 'Regulamentul Triple Fun',
       en: 'Triple Fun Regulations',
@@ -572,26 +562,22 @@ const defaultSiteData: SiteData = {
   }
 };
 
-// Admin credentials - UPDATED TO SIMPLE CREDENTIALS
 const ADMIN_CREDENTIALS = {
   username: 'admin',
   password: 'admin123'
 };
 
-// Storage key for localStorage
 const STORAGE_KEY = 'triple-fun-site-data';
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
 
 export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  // Load initial data from localStorage or use default
   const [siteData, setSiteData] = useState<SiteData>(() => {
     if (typeof window !== 'undefined') {
       try {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
           const parsedData = JSON.parse(stored);
-          // Merge with default data to ensure all properties exist
           return { ...defaultSiteData, ...parsedData };
         }
       } catch (error) {
@@ -609,7 +595,6 @@ export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     return false;
   });
 
-  // Save to localStorage whenever siteData changes
   useEffect(() => {
     if (typeof window !== 'undefined') {
       try {
@@ -620,7 +605,6 @@ export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     }
   }, [siteData]);
 
-  // Save login state to localStorage
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('triple-fun-admin-logged-in', isLoggedIn.toString());

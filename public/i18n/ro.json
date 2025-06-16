@@ -1,0 +1,90 @@
+{
+  "nav": {
+    "services": "Servicii",
+    "menu": "Meniu",
+    "pricing": "Prețuri",
+    "offers": "Oferte",
+    "contact": "Contact",
+    "gallery": "Galerie",
+    "regulations": "Regulament",
+    "admin": "Admin"
+  },
+  "hero": {
+    "title": "Cea mai",
+    "titleHighlight": "distractivă",
+    "titleEnd": "petrecere",
+    "subtitle": "Locul perfect pentru petreceri de copii, evenimente speciale și distracție în familie. Oferim experiențe memorabile într-un mediu sigur și prietenos.",
+    "ctaBook": "Rezervă Acum",
+    "ctaMenu": "Vezi Meniul",
+    "stats": {
+      "parties": "Petreceri reușite",
+      "experience": "Ani experiență",
+      "children": "Copii pe zi"
+    }
+  },
+  "services": {
+    "title": "Serviciile Noastre",
+    "subtitle": "Oferim o gamă completă de servicii pentru a face experiența ta și a copilului tău una specială"
+  },
+  "menu": {
+    "title": "Meniul Nostru",
+    "subtitle": "Preparate delicioase pentru copii și adulți, pregătite cu ingrediente proaspete și multă dragoste",
+    "categories": {
+      "kids": "Meniu Copii",
+      "adults": "Meniu Adulți",
+      "drinks": "Băuturi"
+    }
+  },
+  "pricing": {
+    "title": "Pachete Petreceri",
+    "subtitle": "Alege pachetul perfect pentru petrecerea copilului tău. Toate pachetele includ acces complet la zonele de joacă",
+    "popular": "Cel mai popular",
+    "book": "Rezervă Acum",
+    "additional": "Servicii Adiționale",
+    "extras": {
+      "animators": "Animatori extra",
+      "time": "Prelungire timp",
+      "decorations": "Decorațiuni extra",
+      "transport": "Transport tort"
+    }
+  },
+  "offers": {
+    "title": "Oferte Speciale",
+    "subtitle": "Profită de ofertele noastre speciale și economisește la petrecerea perfectă pentru copilul tău",
+    "cta": {
+      "title": "Hai să facem o petrecere de neuitat!",
+      "subtitle": "Contactează-ne acum pentru a rezerva data dorită și pentru a primi o ofertă personalizată",
+      "call": "Sună Acum",
+      "whatsapp": "Trimite Mesaj WhatsApp"
+    }
+  },
+  "gallery": {
+    "title": "Galeria Noastră",
+    "subtitle": "Descoperă atmosfera magică și momentele speciale de la Triple Fun",
+    "filters": {
+      "all": "Toate",
+      "playground": "Zone de Joacă",
+      "parties": "Petreceri",
+      "food": "Mâncare",
+      "events": "Evenimente"
+    }
+  },
+  "regulations": {
+    "title": "Regulamentul Nostru",
+    "subtitle": "Pentru siguranța și confortul tuturor, vă rugăm să respectați regulamentul nostru"
+  },
+  "contact": {
+    "title": "Contactează-ne",
+    "subtitle": "Suntem aici pentru tine! Contactează-ne pentru rezervări sau pentru orice întrebare"
+  },
+  "footer": {
+    "description": "Locul perfect pentru petreceri de copii și distracție în familie. Creăm amintiri de neuitat într-un mediu sigur și prietenos.",
+    "quickNav": "Navigare Rapidă",
+    "services": "Servicii",
+    "contact": "Contact",
+    "schedule": "Program",
+    "copyright": "© 2024 Triple Fun. Toate drepturile rezervate.",
+    "madeWith": "Făcut cu",
+    "forChildren": "pentru copii"
+  }
+}

@@ -17,7 +17,10 @@ export default defineConfig({
         }
       }
     },
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
+    minify: 'terser',
+    sourcemap: false,
+    target: 'es2015'
   },
   server: {
     host: '0.0.0.0',
@@ -28,6 +31,10 @@ export default defineConfig({
   },
   preview: {
     host: '0.0.0.0',
-    port: 80
+    port: 80,
+    cors: true,
+    headers: {
+      'Cache-Control': 'public, max-age=31536000'
+    }
   }
 });

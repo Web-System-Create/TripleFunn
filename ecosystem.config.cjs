@@ -2,7 +2,7 @@ module.exports = {
   apps: [{
     name: 'triple-fun',
     script: 'npm',
-    args: 'run preview',
+    args: 'run start',
     cwd: process.cwd(),
     instances: 1,
     autorestart: true,

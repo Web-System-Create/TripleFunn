@@ -1,0 +1,90 @@
+{
+  "nav": {
+    "services": "Services",
+    "menu": "Menu",
+    "pricing": "Pricing",
+    "offers": "Offers",
+    "contact": "Contact",
+    "gallery": "Gallery",
+    "regulations": "Regulations",
+    "admin": "Admin"
+  },
+  "hero": {
+    "title": "The most",
+    "titleHighlight": "fun",
+    "titleEnd": "party",
+    "subtitle": "The perfect place for children's parties, special events and family fun. We offer memorable experiences in a safe and friendly environment.",
+    "ctaBook": "Book Now",
+    "ctaMenu": "View Menu",
+    "stats": {
+      "parties": "Successful parties",
+      "experience": "Years experience",
+      "children": "Children per day"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "We offer a complete range of services to make your and your child's experience special"
+  },
+  "menu": {
+    "title": "Our Menu",
+    "subtitle": "Delicious dishes for children and adults, prepared with fresh ingredients and lots of love",
+    "categories": {
+      "kids": "Kids Menu",
+      "adults": "Adults Menu",
+      "drinks": "Drinks"
+    }
+  },
+  "pricing": {
+    "title": "Party Packages",
+    "subtitle": "Choose the perfect package for your child's party. All packages include full access to play areas",
+    "popular": "Most Popular",
+    "book": "Book Now",
+    "additional": "Additional Services",
+    "extras": {
+      "animators": "Extra animators",
+      "time": "Time extension",
+      "decorations": "Extra decorations",
+      "transport": "Cake delivery"
+    }
+  },
+  "offers": {
+    "title": "Special Offers",
+    "subtitle": "Take advantage of our special offers and save on the perfect party for your child",
+    "cta": {
+      "title": "Let's make an unforgettable party!",
+      "subtitle": "Contact us now to book your desired date and receive a personalized offer",
+      "call": "Call Now",
+      "whatsapp": "Send WhatsApp Message"
+    }
+  },
+  "gallery": {
+    "title": "Our Gallery",
+    "subtitle": "Discover the magical atmosphere and special moments at Triple Fun",
+    "filters": {
+      "all": "All",
+      "playground": "Playground",
+      "parties": "Parties",
+      "food": "Food",
+      "events": "Events"
+    }
+  },
+  "regulations": {
+    "title": "Our Regulations",
+    "subtitle": "For everyone's safety and comfort, please follow our regulations"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We are here for you! Contact us for reservations or any questions"
+  },
+  "footer": {
+    "description": "The perfect place for children's parties and family fun. We create unforgettable memories in a safe and friendly environment.",
+    "quickNav": "Quick Navigation",
+    "services": "Services",
+    "contact": "Contact",
+    "schedule": "Schedule",
+    "copyright": "© 2024 Triple Fun. All rights reserved.",
+    "madeWith": "Made with",
+    "forChildren": "for children"
+  }
+}

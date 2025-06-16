@@ -8,33 +8,33 @@ const Offers = () => {
   const offers = [
     {
       icon: Percent,
-      title: t('offers.discount.title'),
-      description: t('offers.discount.desc'),
-      validUntil: t('offers.discount.valid'),
+      title: '20% Reducere Luni-Joi',
+      description: 'Rezervă petrecerea între Luni și Joi și primești 20% reducere la toate pachetele!',
+      validUntil: 'Valabil până pe 31 Decembrie 2024',
       color: 'bg-blue-500',
       bgColor: 'bg-blue-50'
     },
     {
       icon: Users,
-      title: t('offers.free.title'),
-      description: t('offers.free.desc'),
-      validUntil: t('offers.free.valid'),
+      title: 'Al 2-lea Copil GRATUIT',
+      description: 'Pentru rezervări de grup (minimum 20 copii), al 2-lea copil participă gratuit!',
+      validUntil: 'Ofertă permanentă',
       color: 'bg-purple-500',
       bgColor: 'bg-purple-50'
     },
     {
       icon: Calendar,
-      title: t('offers.anniversary.title'),
-      description: t('offers.anniversary.desc'),
-      validUntil: t('offers.anniversary.valid'),
+      title: 'Pachet Aniversar Complet',
+      description: 'Rezervă cu 30 zile înainte și primești decorațiuni tematice și tort personalizat GRATUIT!',
+      validUntil: 'Pentru rezervări în avans',
       color: 'bg-pink-500',
       bgColor: 'bg-pink-50'
     },
     {
       icon: Clock,
-      title: t('offers.happy.title'),
-      description: t('offers.happy.desc'),
-      validUntil: t('offers.happy.valid'),
+      title: 'Happy Hour 10-14',
+      description: 'Între orele 10:00-14:00, toate băuturile și gustările sunt cu 30% mai ieftine!',
+      validUntil: 'În fiecare zi',
       color: 'bg-indigo-500',
       bgColor: 'bg-indigo-50'
     }

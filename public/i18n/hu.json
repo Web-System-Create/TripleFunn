@@ -1,0 +1,90 @@
+{
+  "nav": {
+    "services": "Szolgáltatások",
+    "menu": "Menü",
+    "pricing": "Árak",
+    "offers": "Ajánlatok",
+    "contact": "Kapcsolat",
+    "gallery": "Galéria",
+    "regulations": "Szabályzat",
+    "admin": "Admin"
+  },
+  "hero": {
+    "title": "A leg",
+    "titleHighlight": "szórakoztatóbb",
+    "titleEnd": "buli",
+    "subtitle": "A tökéletes hely gyerekbulikhoz, különleges eseményekhez és családi szórakozáshoz. Emlékezetes élményeket kínálunk biztonságos és barátságos környezetben.",
+    "ctaBook": "Foglalj Most",
+    "ctaMenu": "Menü Megtekintése",
+    "stats": {
+      "parties": "Sikeres bulik",
+      "experience": "Év tapasztalat",
+      "children": "Gyerek naponta"
+    }
+  },
+  "services": {
+    "title": "Szolgáltatásaink",
+    "subtitle": "Teljes körű szolgáltatásokat kínálunk, hogy a te és gyermeked élménye különleges legyen"
+  },
+  "menu": {
+    "title": "Menünk",
+    "subtitle": "Finom ételek gyerekeknek és felnőtteknek, friss alapanyagokból és sok szeretettel készítve",
+    "categories": {
+      "kids": "Gyerek Menü",
+      "adults": "Felnőtt Menü",
+      "drinks": "Italok"
+    }
+  },
+  "pricing": {
+    "title": "Buli Csomagok",
+    "subtitle": "Válaszd ki a tökéletes csomagot gyermeked bulijához. Minden csomag teljes hozzáférést biztosít a játékterületekhez",
+    "popular": "Legnépszerűbb",
+    "book": "Foglalj Most",
+    "additional": "Kiegészítő Szolgáltatások",
+    "extras": {
+      "animators": "Extra animátorok",
+      "time": "Időhosszabbítás",
+      "decorations": "Extra dekorációk",
+      "transport": "Torta szállítás"
+    }
+  },
+  "offers": {
+    "title": "Különleges Ajánlatok",
+    "subtitle": "Használd ki különleges ajánlatainkat és spórolj gyermeked tökéletes buliján",
+    "cta": {
+      "title": "Csináljunk egy felejthetetlen bulit!",
+      "subtitle": "Lépj kapcsolatba velünk most, hogy lefoglald a kívánt dátumot és kapj személyre szabott ajánlatot",
+      "call": "Hívj Most",
+      "whatsapp": "WhatsApp Üzenet Küldése"
+    }
+  },
+  "gallery": {
+    "title": "Galériánk",
+    "subtitle": "Fedezd fel a varázslatos hangulatot és különleges pillanatokat a Triple Fun-ban",
+    "filters": {
+      "all": "Összes",
+      "playground": "Játszótér",
+      "parties": "Bulik",
+      "food": "Étel",
+      "events": "Események"
+    }
+  },
+  "regulations": {
+    "title": "Szabályzatunk",
+    "subtitle": "Mindenki biztonsága és kényelme érdekében kérjük, tartsd be szabályzatunkat"
+  },
+  "contact": {
+    "title": "Kapcsolat",
+    "subtitle": "Itt vagyunk neked! Lépj kapcsolatba velünk foglalásokért vagy bármilyen kérdésért"
+  },
+  "footer": {
+    "description": "A tökéletes hely gyerekbulikhoz és családi szórakozáshoz. Felejthetetlen emlékeket teremtünk biztonságos és barátságos környezetben.",
+    "quickNav": "Gyors Navigáció",
+    "services": "Szolgáltatások",
+    "contact": "Kapcsolat",
+    "schedule": "Nyitvatartás",
+    "copyright": "© 2024 Triple Fun. Minden jog fenntartva.",
+    "madeWith": "Készítve",
+    "forChildren": "gyerekekért"
+  }
+}

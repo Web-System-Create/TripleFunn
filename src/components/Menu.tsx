@@ -8,109 +8,109 @@ const Menu = () => {
 
   const menuCategories = {
     copii: {
-      title: t('menu.category.copii'),
+      title: t('menu.categories.kids'),
       icon: IceCream,
       items: [
         { 
-          name: t('menu.kids.crispy'), 
-          description: t('menu.kids.crispy.desc'), 
+          name: 'Crispy din mușchiuleț de pui', 
+          description: '2 bucăți (100g) + 100g cartofi prăjiți + băutură la alegere', 
           price: '27 lei' 
         },
         { 
-          name: t('menu.kids.pizza'), 
-          description: t('menu.kids.pizza.desc'), 
+          name: 'Pizza Margherita (mini)', 
+          description: 'Pizza specială pentru copii', 
           price: '20 lei' 
         },
         { 
-          name: t('menu.kids.pasta'), 
-          description: t('menu.kids.pasta.desc'), 
+          name: 'Paste cu sos de roșii', 
+          description: 'Porție de copil cu parmezan', 
           price: '18 lei' 
         },
         { 
-          name: t('menu.kids.sandwich'), 
-          description: t('menu.kids.sandwich.desc'), 
+          name: 'Sandwich cu șuncă și cașcaval', 
+          description: 'Pe pâine toast cu cartofi', 
           price: '15 lei' 
         },
         { 
-          name: t('menu.kids.icecream'), 
-          description: t('menu.kids.icecream.desc'), 
+          name: 'Înghețată 3 bile', 
+          description: 'Vanilie, ciocolată, căpșuni', 
           price: '12 lei' 
         },
         { 
-          name: t('menu.kids.cake'), 
-          description: t('menu.kids.cake.desc'), 
+          name: 'Tort personalizat', 
+          description: 'Comandă specială (min. 1kg)', 
           price: '150 lei' 
         }
       ]
     },
     adulti: {
-      title: t('menu.category.adulti'),
+      title: t('menu.categories.adults'),
       icon: Utensils,
       items: [
         { 
-          name: t('menu.adults.grill'), 
-          description: t('menu.adults.grill.desc'), 
+          name: 'Platou Grătar Mixt (10 persoane)', 
+          description: '10 buc crispy pui + 10 buc ceafă + 10 buc mici + 650g cartofi prăjiți', 
           price: '350 lei' 
         },
         { 
-          name: t('menu.adults.charcuterie'), 
-          description: t('menu.adults.charcuterie.desc'), 
+          name: 'Platou Salamuri și Brânzeturi (10 persoane)', 
+          description: 'Salamuri și brânzeturi italiene (2kg) servite cu focaccia', 
           price: '280 lei' 
         },
         { 
-          name: t('menu.adults.burger'), 
-          description: t('menu.adults.burger.desc'), 
+          name: 'Burger Classic', 
+          description: 'Carne de vită, bacon, cașcaval, cartofi', 
           price: '35 lei' 
         },
         { 
-          name: t('menu.adults.caesar'), 
-          description: t('menu.adults.caesar.desc'), 
+          name: 'Salată Caesar', 
+          description: 'Cu pui, crutoane, parmezan', 
           price: '28 lei' 
         },
         { 
-          name: t('menu.adults.pizza'), 
-          description: t('menu.adults.pizza.desc'), 
+          name: 'Pizza Quattro Stagioni', 
+          description: 'Șuncă, ciuperci, măsline, ardei', 
           price: '32 lei' 
         },
         { 
-          name: t('menu.adults.carbonara'), 
-          description: t('menu.adults.carbonara.desc'), 
+          name: 'Paste Carbonara', 
+          description: 'Cu bacon și parmezan', 
           price: '30 lei' 
         }
       ]
     },
     bauturi: {
-      title: t('menu.category.bauturi'),
+      title: t('menu.categories.drinks'),
       icon: Coffee,
       items: [
         { 
-          name: t('menu.drinks.juice'), 
-          description: t('menu.drinks.juice.desc'), 
+          name: 'Sucuri naturale', 
+          description: 'Portocale, mere, morcovi', 
           price: '8 lei' 
         },
         { 
-          name: t('menu.drinks.lemonade'), 
-          description: t('menu.drinks.lemonade.desc'), 
+          name: 'Limonadă fresh', 
+          description: 'Preparată în casă', 
           price: '10 lei' 
         },
         { 
-          name: t('menu.drinks.coffee'), 
-          description: t('menu.drinks.coffee.desc'), 
+          name: 'Cafea espresso', 
+          description: 'Blend premium', 
           price: '6 lei' 
         },
         { 
-          name: t('menu.drinks.tea'), 
-          description: t('menu.drinks.tea.desc'), 
+          name: 'Ceai vrac', 
+          description: 'Diverse arome', 
           price: '5 lei' 
         },
         { 
-          name: t('menu.drinks.smoothie'), 
-          description: t('menu.drinks.smoothie.desc'), 
+          name: 'Smoothie fructe', 
+          description: 'Banane, căpșuni, mango', 
           price: '15 lei' 
         },
         { 
-          name: t('menu.drinks.water'), 
-          description: t('menu.drinks.water.desc'), 
+          name: 'Apă minerală', 
+          description: '0.5L sau 1.5L', 
           price: '4-6 lei' 
         }
       ]

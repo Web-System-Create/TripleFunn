@@ -33,7 +33,7 @@ const Hero = () => {
             </div>
             
             <h1 className="text-6xl lg:text-7xl font-bold mb-8 leading-tight">
-              {t('hero.title')} <span className="text-blue-200 animate-pulse">{t('hero.title.highlight')}</span> {t('hero.title.end')}
+              {t('hero.title')} <span className="text-blue-200 animate-pulse">{t('hero.titleHighlight')}</span> {t('hero.titleEnd')}
               <div className="inline-flex ml-4">
                 <Sparkles className="h-12 w-12 text-blue-200 animate-spin" />
                 <Heart className="h-10 w-10 text-pink-300 animate-bounce ml-2" />
@@ -42,18 +42,18 @@ const Hero = () => {
             </h1>
             
             <p className="text-2xl mb-10 opacity-90 leading-relaxed font-medium">
-              {siteData.hero.subtitle}
+              {t('hero.subtitle')}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 mb-12">
               <button className="bg-white text-purple-700 px-12 py-6 rounded-full font-bold text-2xl hover:bg-gray-100 hover:text-purple-800 transition-all transform hover:scale-110 shadow-2xl border-4 border-white relative overflow-hidden group">
                 <span className="relative z-10 flex items-center justify-center">
-                  {t('hero.cta.book')} 🎉
+                  {t('hero.ctaBook')} 🎉
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-orange-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               </button>
               <button className="border-4 border-white text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-white hover:text-purple-600 transition-all transform hover:scale-105 shadow-xl">
-                {t('hero.cta.menu')} 🍕
+                {t('hero.ctaMenu')} 🍕
               </button>
             </div>
             
